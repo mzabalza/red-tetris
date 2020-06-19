@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  http-server:
+    container_name: http-server
+    build: ./server/http-server
+    ports:
+      - "5005:5005"
+
+  socket-server:
+    container_name: socket-server
+    build: ./server/socket-server
+    ports:
+      - "5003:5003"
+
+  nginx: # Nginx Server For Frontend App
+    container_name: nginx
+    build: ./client
+    volumes: # Serve local "public" dir
+      - ./client/build:/usr/share/nginx/html
+    ports:
+      - "10080:80" # Forward site to localhost:8080

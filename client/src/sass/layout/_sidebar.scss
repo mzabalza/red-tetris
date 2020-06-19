@@ -1,0 +1,25 @@
+
+.sidebar {
+    flex: 1;
+    background-color: var(--color-blue-disney);
+    // width: 100vw;
+    // height: 100vh;
+    color: var(--color-white-1);
+
+
+    // FONT
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    
+    // background-image: linear-gradient(to right bottom, var(--color-blue-disney-1), var(--color-blue-disney));
+
+
+}
+
+.user-item {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-grey-medium-1);
+}

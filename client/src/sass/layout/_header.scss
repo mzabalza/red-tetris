@@ -1,0 +1,51 @@
+.header {
+
+    box-shadow: 0 3rem 8rem;
+    height: 7rem;
+
+
+    // FONT
+    font-size: 2.2rem;
+    font-weight: 300;
+    // letter-spacing: 1.2px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+
+    // COLOR
+    background-color: var(--color-blue-disney);
+    color: var(--color-white-1);
+
+    // FLEXBOX
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--sidebar {
+        padding: 1rem;
+        margin: 1rem;
+        height: 5rem;
+        font-size: 1.8rem;
+        background-color: var(--color-grey-dark-1);
+        box-shadow: 0 2rem 4rem rgba(var(--color-grey-medium-1), .15);
+
+    }
+
+}
+
+
+//////////////////////////////////////
+// USER NAVIGATION
+.user-nav {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+
+    // All direct children: this case __icon-box and __user
+    & > * {
+        padding: 0 2rem;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}

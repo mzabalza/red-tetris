@@ -1,0 +1,42 @@
+:root {
+    // COLORS
+    --color-primary-light: rgb(54, 123, 250);
+    --color-primary-dark: rgb(2, 62, 175);
+
+    // WHITE-GREY-BLACK
+    --color-white: #fff;
+    --color-white-1: #f7f7f7;
+    --color-grey-light-1: #ece9e9;
+    --color-grey-medium-1: #9b9b9b;
+    --color-grey-medium-2: #5e5e5e;
+    --color-grey-medium-3: #414141;
+    --color-grey-dark-1: #1a1a1a;
+    --color-grey-dark-2: #0f0f0f;
+
+    // RED
+    --color-red-light-1: #ff8181;
+    --color-red-medium-1: #ff5757;
+    --color-red-dark-1: #ff1f1f;
+    --color-red-dark-2: #970b0b;
+
+    // GREEN
+    --color-green-light-1: #a5e985;
+    --color-green-medium-1: #73df42;
+    --color-green-dark-1: #309900;
+
+    // BLUE
+    --color-blue-light-1: #589bff;
+    --color-blue-medium-1: #1051b4;
+    --color-blue-dark-1: #0e3570;
+
+    --color-blue-disney-light: rgb(21, 23, 31);
+    --color-blue-disney: #0A0B0F;
+    --color-blue-disney-1: rgb(13, 15, 20);
+    // SHADOWS
+    --shadow-dark: 0 2rem 6rem rgba(56, 36, 36, 0.3);
+
+    // FONT
+    --font-size-default: 1.6rem;
+    --font-size-medium: 2rem;
+    --font-size-big: 5rem;
+}

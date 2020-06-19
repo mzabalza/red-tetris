@@ -1,0 +1,26 @@
+
+
+/* Forms */
+.form {
+
+}
+
+
+.form input[type='text'],
+.form input[type='password'] {
+
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: var(--color-grey-medium-1);
+  border: 0.15rem solid var(--color-grey-medium-1);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background-color: var(--color-blue-disney-dark);
+  min-width: 20rem;
+  width: 16vw;
+
+  &:focus {
+    outline:0;
+  }
+
+}

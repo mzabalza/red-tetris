@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://mzabalza:lab321654987@cluster0-kwgnc.mongodb.net/tetris?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
+}

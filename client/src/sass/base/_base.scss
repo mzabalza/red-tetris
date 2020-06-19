@@ -1,0 +1,38 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+     
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px (10px/16px)
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6rem;
+    // background-image: linear-gradient(to right bottom, var(--color-blue-disney), var(--color-blue-disney-light));
+    // color: var(--color-grey-dark-2);
+    // background: url('../../img/background_disney.png');
+    // background-image: linear-gradient(to right bottom, var(--color-blue-disney), var(--color-blue-disney-light));
+    background-color: var(--color-blue-disney);
+
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+}
+
+.content {
+    background: url('../../img/background_disney.png');
+    display: flex;
+}
