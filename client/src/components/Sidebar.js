@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Sidebar = ({ setDropTime, setLevel, setScore, socket }) => {
+const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData }) => {
 
     const [users, setUsers] = useState([]);
 
@@ -8,15 +8,17 @@ const Sidebar = ({ setDropTime, setLevel, setScore, socket }) => {
         if (!socket) {
             return undefined
         }
-        console.log('Users fuera de socket.on users');
-        socket.on('users', ({ users }) => {
-            console.log('Users: ');
+        // console.log('Users fuera de socket.on users');
+        // socket.on('room', ({ room }) => {
+        //     console.log('Room data: ');
+        //     console.log(room);
+        //     // setUsers(users);
+        // });
+        setUsers(roomData.users);
+        console.log('Users in sidebar!!!!:');
+        console.log(roomData.users);
 
-            console.log(users);
-            // setUsers(users);
-        });
-
-    }, [socket]);
+    }, [roomData]);
 
 
     const level = (nb) => {
@@ -83,7 +85,7 @@ const Sidebar = ({ setDropTime, setLevel, setScore, socket }) => {
                     users.map((user, x) => (
                         <div key={x}>
                             <div className="user-item">
-                                <div>{x + 1}. {user.name}</div>
+                                <div>{x + 1}. {user.userName}</div>
                                 <div className="flex-row-1">
                                     <div className="pdng-w-2">{user.score}</div>
                                     <div className="pdng-w-2">{user.level}</div>

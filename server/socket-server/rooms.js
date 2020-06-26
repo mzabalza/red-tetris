@@ -26,9 +26,8 @@ const addRoom = ({ masterUser, level, nbPlayers, roomName }) => {
 
 const getRoom = async (roomName) => {
 
-    const room = `{process.env.}http://localhost:5005/api/room/mordor`
-
-    // rooms.find((room) => room.roomName === roomName);
+    const res = await axios.get(`${process.env.API_URI}/room/${roomName}`);
+    return res
 
 }
 

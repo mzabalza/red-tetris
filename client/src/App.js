@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Join from './components/Join/Join';
 import Landing from './components/Landing/Landing';
 import Login from './components/Auth/Login';
+import Admin from './components/Admin/Admin';
 import Register from './components/Auth/Register';
 import Home from './components/Home/Home';
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -42,8 +43,9 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route path="/join" component={Join} />
           <Route path="/login" component={Login} />
+          <Route path="/admin" component={Admin} />
           <Route path="/register" component={Register} />
-          <Route path="/tetris" component={Tetris} />
+          <PrivateRoute path="/tetris" component={Tetris} />
           <PrivateRoute path="/home" component={Home} />
         </Switch>
       </BrowserRouter>

@@ -42,6 +42,7 @@ const Tetris = ({ auth, location }) => {
 
   const [userName, setUserName] = useState('');
   const [room, setRoom] = useState('');
+  const [roomData, setRoomData] = useState({});
 
   const [gameOver, setGameOver] = useState(false);
 
@@ -57,6 +58,13 @@ const Tetris = ({ auth, location }) => {
   useEffect(() => {
 
     socket = io(process.env.REACT_APP_SOCKET_URL);
+
+    socket.on('room', ({ room }) => {
+      console.log('Room data: ');
+      console.log(room);
+      setRoomData(room);
+      // setUsers(users);
+    });
 
 
     setRoom(location.state.formData.roomName);
@@ -120,6 +128,9 @@ const Tetris = ({ auth, location }) => {
 
     putRoom();
     // Save Users in room as soon as user is loaded in the component
+
+    socket.emit('room', { roomName: room });
+
 
 
   }, [user, room])
@@ -223,7 +234,7 @@ const Tetris = ({ auth, location }) => {
         <Header name={userName} room={room} />
         <div className="content">
           <Sidebar
-            // users={users}
+            roomData={roomData}
             socket={socket}
             setLevel={setLevel}
             setDropTime={setDropTime}

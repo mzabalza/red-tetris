@@ -60,11 +60,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('room', async ({ roomName }) => {
-        // const room = await getRoom(roomName);
+        const res = await getRoom(roomName);
+        const room = res.data;
         // console.log('Providing users in room');
-        // console.log(users);
-
-        // io.to(roomName).emit('users', { room: roo,roomName, users: users });
+        console.log('socket.on room');
+        console.log(room);
+        io.to(roomName).emit('room', { room });
 
     });
 
