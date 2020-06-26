@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 // COMPONENTS
 import GameModal from '../GameModal';
@@ -27,26 +29,10 @@ const Home = ({ auth: { user }, logout }) => {
     const [roomFlag, setRoomFlag] = useState(true);
 
 
-    const ENDPOINT = 'localhost:5003';
-
-    // useEffect(() => {
-    //     socket = io(ENDPOINT);
-
-    //     socket.on('rooms', ({ rooms }) => {
-    //         console.log('Rooms: ');
-    //         console.log(rooms);
-    //         setRooms(rooms);
-    //     });
-
-    // }, []);
-
-
     const homeClick = e => {
         console.log('clicking home click');
 
     }
-
-
 
 
     const openModal = () => {
@@ -77,10 +63,11 @@ const Home = ({ auth: { user }, logout }) => {
                             <i className="fas fa-gamepad fa-2x"></i>
                             <div></div>
                         </div>
-                        <div className="item flex-col-1">
+
+                        <Link to={{ pathname: "/admin"}} className="item flex-col-1">
                             <i className="fas fa-user"></i>
                             <div></div>
-                        </div>
+                        </Link>
                         <div className="item flex-col-1">
                             <i className="fas fa-trophy fa-2x"></i>
                             <div></div>
