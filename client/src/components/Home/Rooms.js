@@ -4,12 +4,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-//Actions
-// import { getRooms } from '../../actions';
-
-
-
-
 const Rooms = ({ modalIsOpen }) => {
 
     const [rooms, setRooms] = useState([]);
@@ -29,11 +23,7 @@ const Rooms = ({ modalIsOpen }) => {
             }
         }
         fetchRooms();
-
-        // Get current users profile
-
     }, [modalIsOpen, flag])
-
 
     const removeRoom = async e => {
         // preventdefault?
@@ -49,7 +39,6 @@ const Rooms = ({ modalIsOpen }) => {
             setFlag(!flag)
         } catch (err) {
             console.log(`Error: ${err}`)
-
         };
     }
 

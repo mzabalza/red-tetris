@@ -17,6 +17,10 @@ const RoomSchema = new mongoose.Schema({
     },
     users: [
         {
+            socket: {
+                type: String,
+                required: true
+            },
             userName: {
                 type: String,
                 required: true

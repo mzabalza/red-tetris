@@ -87,18 +87,49 @@ router.post("/",
 // @route       DELETE api/profile
 // @desc        Delete profile, user, & post
 // @access      Private
-router.delete('/', auth, async (req, res) => {
+// router.delete('/', auth, async (req, res) => {
+
+//   try {
+//     // Remove users posts
+//     // await Post.deleteMany({ user: req.user.id });
+
+//     // // Remove profile
+//     // await Profile.findOneAndRemove({ user: req.user.id });
+//     // Remove user
+//     await User.findOneAndRemove({ _id: req.user.id });
+
+//     res.json({ msg: 'User deleted' });
+
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server error');
+//   }
+// });
+
+// @route       DELETE api/user
+// @desc        Delete user by username
+// @access      Private
+router.delete('/', auth, [[
+  check("name", "Name is required").not().isEmpty(),
+]], async (req, res) => {
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  const { name } = req.body;
+
+
+  // 1. See if room exists
+  let user = await User.findOne({ name });
+  if (!user) {
+    return res.status(400).json({ errors: [{ msg: 'User doesnt exist' }] })
+  }
+
 
   try {
-    // Remove users posts
-    // await Post.deleteMany({ user: req.user.id });
-
-    // // Remove profile
-    // await Profile.findOneAndRemove({ user: req.user.id });
-    // Remove user
-    await User.findOneAndRemove({ _id: req.user.id });
-
-    res.json({ msg: 'User deleted' });
+    await User.findOneAndRemove({ name });
+    res.json({ msg: `User ${name} deleted` });
 
   } catch (err) {
     console.error(err.message);

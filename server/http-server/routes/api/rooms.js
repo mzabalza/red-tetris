@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require("express-validator");
 
 
+
 const Room = require('../../models/Room');
 
 // @route       POST api/users
@@ -55,7 +56,7 @@ router.post('/',
 );
 
 // @route       DELETE api/room
-// @desc        Delete room
+// @desc        Delete room by roomName
 // @access      Private
 router.delete('/', [[
     check("roomName", "Name is required").not().isEmpty(),
@@ -129,6 +130,7 @@ router.get('/:roomName', async (req, res) => {
 router.put('/',
     [
         // userName, roomName, score, level
+        check("socket", "userName is required").not().isEmpty(),
         check("userName", "userName is required").not().isEmpty(),
         check("roomName", "roomName is required").not().isEmpty(),
         check("score", "score is required").not().isEmpty(),
@@ -139,9 +141,9 @@ router.put('/',
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() })
         }
-        const { roomName, userName, score, level } = req.body;
+        const { socket, roomName, userName, score, level } = req.body;
 
-        const user = { userName, score, level };
+        const user = { socket, userName, score, level };
 
         try {
             const room = await Room.findOne({ roomName });
@@ -160,6 +162,61 @@ router.put('/',
 
         } catch (err) {
             console.error(err.message);
+            res.status(500).send('Server error');
+
+        }
+    });
+
+// @route       DELETE api/room/
+// @desc        Delete user in room by socket.id
+// @access      Public
+// TODO: Make it private
+router.delete('/socket',
+    [
+        check('socket', 'socket is required').not().isEmpty(),
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+
+        const { socket } = req.body;
+        console.log(req.body);
+
+        try {
+
+            const rooms = await Room.find();
+            if (!rooms) {
+                return res.status(400).json({ errors: [{ msg: 'Room doenst exist' }] })
+            }
+
+            let room_name_tmp = null
+            let user_name_tmp = null
+
+            rooms.map((room) => {
+                room.users.map((user => {
+                    if (user.socket === socket) {
+                        room_name_tmp = room.roomName;
+                        user_name_tmp = user.userName;
+                    }
+                }))
+            })
+
+            console.log(room_name_tmp, user_name_tmp)
+
+            if (!room_name_tmp) {
+                res.json({ message: `User not found for socket id: ${socket}` })
+            }
+
+            const room_tmp = await Room.findOne({ roomName: room_name_tmp });
+            room_tmp.users = room_tmp.users.filter(user => user.socket != socket)
+            await room_tmp.save();
+            res.json(room_tmp);
+
+
+        } catch (error) {
+            console.log(error);
             res.status(500).send('Server error');
 
         }
@@ -186,7 +243,9 @@ router.delete('/:roomName',
             if (!room) {
                 return res.status(400).json({ errors: [{ msg: 'Room doenst exist' }] })
             }
-            room.users = room.users.filter(user => user.name != userName)
+
+
+            room.users = room.users.filter(user => user.userName != userName)
             await room.save();
             res.json(room);
 
@@ -196,6 +255,7 @@ router.delete('/:roomName',
 
         }
     });
+
 
 
 module.exports = router;

@@ -3,20 +3,20 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { createStage, checkCollision } from '../gameHelpers';
+import { createStage, checkCollision } from '../../gameHelpers';
 
 
 // Actions
 
 // Styled Components
-import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
+import { StyledTetrisWrapper, StyledTetris } from '../styles/StyledTetris';
 
 // Custom Hooks
-import { useInterval } from '../hooks/useInterval';
-import { usePlayer } from '../hooks/usePlayer';
-import { useStage } from '../hooks/useStage';
-import { useGameStatus } from '../hooks/useGameStatus';
-import { useDropTime } from '../hooks/useDropTime';
+import { useInterval } from '../../hooks/useInterval';
+import { usePlayer } from '../../hooks/usePlayer';
+import { useStage } from '../../hooks/useStage';
+import { useGameStatus } from '../../hooks/useGameStatus';
+import { useDropTime } from '../../hooks/useDropTime';
 
 // Components
 import Stage from './Stage';
@@ -42,21 +42,22 @@ const Tetris = ({ auth, location }) => {
 
   const [userName, setUserName] = useState('');
   const [room, setRoom] = useState('');
-  const [roomData, setRoomData] = useState({});
+  const [roomData, setRoomData] = useState({
+    users: []
+  });
 
   const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
-  const [dropTime, setDropTime] = useDropTime(level);
+  // const [dropTime, setDropTime] = useDropTime(level);
+  const [dropTime, setDropTime] = useDropTime(null);
 
 
   console.log('re-render');
 
-
   useEffect(() => {
-
     socket = io(process.env.REACT_APP_SOCKET_URL);
 
     socket.on('room', ({ room }) => {
@@ -65,6 +66,14 @@ const Tetris = ({ auth, location }) => {
       setRoomData(room);
       // setUsers(users);
     });
+  }, []);
+
+
+  useEffect(() => {
+
+    if (!auth.user) {
+      return undefined
+    }
 
 
     setRoom(location.state.formData.roomName);
@@ -83,16 +92,16 @@ const Tetris = ({ auth, location }) => {
 
 
 
-  }, [location.state.formData]);
+  }, [location.state.formData, auth.user]);
 
-  useEffect(() => {
-    socket.emit('join', { roomName: room, ...user }, (error) => {
-      if (error) {
-        alert(error);
-      }
-    });
+  // useEffect(() => {
+  //   socket.emit('join', { roomName: room, ...user }, (error) => {
+  //     if (error) {
+  //       alert(error);
+  //     }
+  //   });
 
-  }, [user])
+  // }, [user])
 
 
   useEffect(() => {
@@ -104,32 +113,43 @@ const Tetris = ({ auth, location }) => {
       return undefined
     }
 
-    const putRoom = async () => {
-      const config = { headers: { 'Content-Type': 'application/json' } }
-      const body = {
-        roomName: room,
-        ...user
-      };
+    const body = {
+      roomName: room,
+      ...user
+    };
 
-      try {
-        console.log(`Putting user: ${user.userName} in room ${room}`);
-        console.log(user);
-
-        const res = await axios.put(`${process.env.REACT_APP_API_URL}/room`, body, configure);
-        console.log('user stored in room:');
-
-        console.log(res);
-
-      } catch (error) {
-
+    socket.emit('addUser', { body }, (error) => {
+      if (error) {
+        alert(error);
       }
+    });
 
-    }
+    // const putRoom = async () => {
+    //   const config = { headers: { 'Content-Type': 'application/json' } }
+    //   const body = {
+    //     roomName: room,
+    //     ...user
+    //   };
 
-    putRoom();
+    //   try {
+    //     console.log(`Putting user: ${user.userName} in room ${room}`);
+    //     console.log(user);
+
+    //     const res = await axios.put(`${process.env.REACT_APP_API_URL}/room`, body, configure);
+    //     console.log('user stored in room:');
+
+    //     console.log(res);
+
+    //   } catch (error) {
+
+    //   }
+
+    // }
+
+    // putRoom();
     // Save Users in room as soon as user is loaded in the component
 
-    socket.emit('room', { roomName: room });
+    // socket.emit('room', { roomName: room });
 
 
 
@@ -138,7 +158,8 @@ const Tetris = ({ auth, location }) => {
   useEffect(() => {
     console.log('editUser');
     socket.emit('editUser', { userName, room, score, level });
-    setDropTime(1000 - ((level) * 100));
+    // setDropTime(1000 - ((level) * 100));
+    setDropTime(null);
   }, [score, level]);
 
   const movePlayer = dir => {
@@ -231,7 +252,7 @@ const Tetris = ({ auth, location }) => {
         onKeyDown={e => move(e)}
         onKeyUp={e => keyUp(e)}
       >
-        <Header name={userName} room={room} />
+        <Header room={room} />
         <div className="content">
           <Sidebar
             roomData={roomData}

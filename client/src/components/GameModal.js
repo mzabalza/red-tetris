@@ -79,12 +79,6 @@ const GameModal = ({ modalIsOpen, closeModal, masterUser }) => {
 
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/room`, body, config);
         closeModal();
-        // socket.emit('createRoom', { masterUser, level, nbPlayers, roomName }, error => {
-        //     if (error) {
-        //         alert(error);
-        //     }
-        // });
-
     }
 
 

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
-import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
@@ -14,11 +11,12 @@ import Rooms from './Rooms';
 import { logout } from '../../actions/auth';
 
 
-let socket;
 
 
 
 const Home = ({ auth: { user }, logout }) => {
+
+    console.log(user);
 
     //////////////////////////////////////////////////////
     // MODAL HANDLERS
@@ -64,7 +62,7 @@ const Home = ({ auth: { user }, logout }) => {
                             <div></div>
                         </div>
 
-                        <Link to={{ pathname: "/admin"}} className="item flex-col-1">
+                        <Link to={{ pathname: "/admin" }} className="item flex-col-1">
                             <i className="fas fa-user"></i>
                             <div></div>
                         </Link>

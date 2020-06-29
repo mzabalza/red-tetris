@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
 // Actions
-import { logout } from '../actions/auth';
+import { logout } from '../../actions/auth';
 import axios from 'axios';
 
 
@@ -12,10 +12,12 @@ import axios from 'axios';
 const Header = ({ auth, room, logout }) => {
 
     // [room, setRoom] = useState(null);
-    // [room, setRoom] = useState(null);
+    const [userName, setUserName] = useState('');
 
     console.log('Room: ');
     console.log(room);
+
+
 
 
 
@@ -41,6 +43,9 @@ const Header = ({ auth, room, logout }) => {
             <header className="header">
 
                 <nav className="user-nav">
+                    <div className="user-nav__box">
+                        {auth.user && <span className="user-nav__notification">User: {auth.user.name}</span>}
+                    </div>
                     <div className="user-nav__box">
                         {room && <span className="user-nav__notification">ROOM: {room}</span>}
                     </div>

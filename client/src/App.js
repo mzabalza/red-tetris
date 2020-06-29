@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Tetris from './components/Tetris';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // COMPONENTS
+import Tetris from './components/Tetris/Tetris';
 import Join from './components/Join/Join';
 import Landing from './components/Landing/Landing';
 import Login from './components/Auth/Login';

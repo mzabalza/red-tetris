@@ -27,7 +27,7 @@ const users = [];
 
 //     return { user };
 // };
-const addUser = ({ id, userName, roomName, score, level }) => {
+const addUser = async ({ socket, userName, roomName, score, level }) => {
     // Clean variables
     // ...
     // Check if user exists
@@ -36,20 +36,48 @@ const addUser = ({ id, userName, roomName, score, level }) => {
     // if (existingUser) {
     //     return { error: 'Username is taken' };
     // }
-    const user = { id, name, room, score, level };
+    // const user = { id, name, room, score, level };
 
-    users.push(user);
+    // users.push(user);
+    console.log(socket, userName, roomName, score, level);
+    const config = { headers: { 'Content-Type': 'application/json' } }
+    const body = { socket, roomName, userName, score, level };
 
-    return { user };
-};
+    try {
 
-const removeUser = (id) => {
-    const index = users.findIndex((user) => user.id === id);
+        const res = await axios.put(`${process.env.API_URI}/room`, body, config);
+        return { room: res.data }
+    } catch (error) {
+        console.log(error.message)
+        return { error }
 
-    if (index !== -1) {
-        return users.splice(index, 1)[0]
     }
+
 };
+
+
+
+const removeUser = async (socket) => {
+
+
+
+
+    try {
+        const res = await axios.delete(`${process.env.API_URI}/room/socket`, { data: socket });
+
+        console.log('INSIDEEEE REMOOVE USER!!!!!')
+        console.log(socket);
+        console.log(res.data)
+        return { room: res.data }
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return { error }
+    };
+};
+
+
+
+
 
 const editUser = (editedUser) => {
     const foundIndex = users.findIndex(user => user.id == editedUser.id);
