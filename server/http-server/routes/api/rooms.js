@@ -137,8 +137,11 @@ router.put('/',
         check("level", "level is required").not().isEmpty(),
     ],
     async (req, res) => {
+        console.log('put user in room')
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log(errors)
+
             return res.status(400).json({ errors: errors.array() })
         }
         const { socket, roomName, userName, score, level } = req.body;
@@ -147,7 +150,6 @@ router.put('/',
 
         try {
             const room = await Room.findOne({ roomName });
-            console.log(room);
             if (!room) {
                 return res.status(400).json({ errors: [{ msg: 'Room doesnt exist' }] });
             }
@@ -157,6 +159,8 @@ router.put('/',
             if (index === -1) {
                 room.users.unshift(user); // pushes to the beginning of an array
             } else {
+                console.log('User exists')
+                console.log(user)
                 room.users[index] = user
             };
 

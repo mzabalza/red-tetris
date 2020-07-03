@@ -8,7 +8,7 @@ const connectDB = require("./config/db");
 
 
 
-const { addUser, removeUser, getUser, getUsersInRoom, editUser } = require('./users');
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const { getRooms, addRoom, getRoom } = require('./rooms');
 
 
@@ -68,6 +68,8 @@ io.on('connection', (socket) => {
 
     })
 
+    ///////////////////////////////////////////////////////////////////////////
+    // PROVIDE DATA FROM A GIVEN ROM
     socket.on('room', async ({ roomName }) => {
         const res = await getRoom(roomName);
         const room = res.data;
@@ -78,11 +80,11 @@ io.on('connection', (socket) => {
 
     });
 
+    ///////////////////////////////////////////////////////////////////////////
+    // CREATE ROOM
     socket.on('createRoom', ({ masterUser, level, nbPlayers, roomName }, callback) => {
         console.log('Creating Room');
-        ///////////////////////////////////////////////////////////////
-        // Register Room
-        // const addRoom = ({ masterUser, level, nbPlayers, roomName, users }) => {
+
 
         const { error, room } = addRoom({ masterUser, level, nbPlayers, roomName });
         // socket.join - joins a user to a room
@@ -99,9 +101,14 @@ io.on('connection', (socket) => {
 
     });
 
-    socket.on('editUser', (user) => {
-        io.to(user.room).emit('users', { room: user.room, users: editUser({ ...user, id: socket.id }) });
-    });
+    // socket.on('editUser', (user) => {
+        
+    //     console.log('editUser:')
+    //     console.log(user)
+    //     const users = addUser({ ...user, id: socket.id })
+
+    //     io.to(user.room).emit('users', { room: user.room, users });
+    // });
 
 
     socket.on('disconnect', async () => {

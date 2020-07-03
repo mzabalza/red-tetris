@@ -33,12 +33,7 @@ let socket;
 const Tetris = ({ auth, location }) => {
 
 
-  // const [user, setUser] = useState('');
-  const [user, setUser] = useState({
-    userName: '',
-    score: 0,
-    level: 0
-  });
+
 
   const [userName, setUserName] = useState('');
   const [room, setRoom] = useState('');
@@ -84,12 +79,7 @@ const Tetris = ({ auth, location }) => {
     console.log('Form data: ');
     console.log(location.state.formData);
 
-    setUser({
-      ...user,
-      userName: auth.user.name,
-      level: location.state.formData.level,
-    });
-
+ 
     setUserName(auth.user.name);
 
 
@@ -101,15 +91,15 @@ const Tetris = ({ auth, location }) => {
   useEffect(() => {
     console.log('put user useEffect');
 
-    console.log(!user, !room);
-
-    if (!user | !room) {
+    if (!userName | !room) {
       return undefined
     }
 
     const body = {
       roomName: room,
-      ...user
+      userName: userName,
+      score,
+      level,
     };
 
     socket.emit('addUser', { body }, (error) => {
@@ -118,13 +108,33 @@ const Tetris = ({ auth, location }) => {
       }
     });
 
-  }, [user, room])
+  }, [userName, room])
 
   useEffect(() => {
-    console.log('editUser');
-    socket.emit('editUser', { userName, room, score, level });
+    console.log('editUser useEffect');
+
+
+    if (!userName | !room) {
+      return undefined
+    }
+
+    const body = {
+      roomName: room,
+      userName: userName,
+      score,
+      level,
+    };
+
+    console.log(body)
+    // socket.emit('addUser', { userName, room, score, level });
+    socket.emit('addUser', { body }, (error) => {
+      if (error) {
+        alert(error);
+      }
+    });
     // setDropTime(1000 - ((level) * 100));
     setDropTime(null);
+
   }, [score, level]);
 
   const movePlayer = dir => {
