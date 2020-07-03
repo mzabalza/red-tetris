@@ -69,6 +69,8 @@ const Tetris = ({ auth, location }) => {
   }, []);
 
 
+
+
   useEffect(() => {
 
     if (!auth.user) {
@@ -94,14 +96,6 @@ const Tetris = ({ auth, location }) => {
 
   }, [location.state.formData, auth.user]);
 
-  // useEffect(() => {
-  //   socket.emit('join', { roomName: room, ...user }, (error) => {
-  //     if (error) {
-  //       alert(error);
-  //     }
-  //   });
-
-  // }, [user])
 
 
   useEffect(() => {
@@ -123,35 +117,6 @@ const Tetris = ({ auth, location }) => {
         alert(error);
       }
     });
-
-    // const putRoom = async () => {
-    //   const config = { headers: { 'Content-Type': 'application/json' } }
-    //   const body = {
-    //     roomName: room,
-    //     ...user
-    //   };
-
-    //   try {
-    //     console.log(`Putting user: ${user.userName} in room ${room}`);
-    //     console.log(user);
-
-    //     const res = await axios.put(`${process.env.REACT_APP_API_URL}/room`, body, configure);
-    //     console.log('user stored in room:');
-
-    //     console.log(res);
-
-    //   } catch (error) {
-
-    //   }
-
-    // }
-
-    // putRoom();
-    // Save Users in room as soon as user is loaded in the component
-
-    // socket.emit('room', { roomName: room });
-
-
 
   }, [user, room])
 

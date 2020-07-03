@@ -149,10 +149,17 @@ router.put('/',
             const room = await Room.findOne({ roomName });
             console.log(room);
             if (!room) {
-                return res.status(400).json({ errors: [{ msg: 'Room doesnt exist' }] })
+                return res.status(400).json({ errors: [{ msg: 'Room doesnt exist' }] });
             }
 
-            room.users.unshift(user); // pushes to the beginning of an array
+            index = room.users.findIndex(user => user.socket === socket);
+
+            if (index === -1) {
+                room.users.unshift(user); // pushes to the beginning of an array
+            } else {
+                room.users[index] = user
+            };
+
 
             await room.save();
             res.json(room);

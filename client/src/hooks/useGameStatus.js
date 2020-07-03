@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+
 // import io from "socket.io-client";
 
 
@@ -17,6 +19,7 @@ export const useGameStatus = (rowsCleared) => {
         if (rowsCleared > 0) {
             setScore(prev => prev + linePoints[rowsCleared - 1] * (level + 1));
             setRows(prev => prev + rowsCleared);
+
         }
 
     }, [level, linePoints, rowsCleared]) // ??
