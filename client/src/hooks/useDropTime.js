@@ -8,8 +8,9 @@ export const useDropTime = (callback, level) => {
     const [dropTime, setDropTime] = useState(null);
 
     useEffect(() => {
-        console.log('level Changes');
+        console.log('Use Drop Time useEffect: level Changes');
         setDropTime(1000 - ((level) * 100));
+        setDropTime(null);
 
     }, [level])
 

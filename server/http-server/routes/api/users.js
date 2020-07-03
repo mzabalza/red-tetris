@@ -13,7 +13,7 @@ const User = require('../../models/User');
 // @desc        Get all users
 // @access      Public
 router.get('/', async (req, res) => {
-
+  console.log(`Get all users subscribed to TETRIS.IO`);
   try {
     const users = await User.find();
     res.json(users)
@@ -34,10 +34,14 @@ router.post("/",
   ],
   // we make this function async to be able to work with asinc/await for mongoose promises. Avoiding .then()
   async (req, res) => {
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors)
       return res.status(400).json({ errors: errors.array() })
     }
+    console.log(`Register User: ${name}`);
+
     // console.log(req.body);
     const { name, password } = req.body;
 
@@ -112,10 +116,11 @@ router.delete('/', auth, [[
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log(error);
     return res.status(400).json({ errors: errors.array() })
   }
   const { name } = req.body;
-
+  console.log(`Delete User: ${name}`);
 
   // 1. See if room exists
   let user = await User.findOne({ name });

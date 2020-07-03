@@ -64,8 +64,8 @@ const Rooms = ({ modalIsOpen }) => {
                             formData: {
                                 name: null,
                                 roomName: room.roomName,
-                                nbPlayers: 0,
-                                level: 0
+                                nbPlayers: room.nbPlayers,
+                                level: room.level
                             }
                         }
                     }}

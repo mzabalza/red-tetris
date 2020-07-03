@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import { createStage, checkCollision } from '../../gameHelpers';
-
-
-// Actions
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from '../styles/StyledTetris';
@@ -33,14 +29,11 @@ let socket;
 const Tetris = ({ auth, location }) => {
 
 
-
-
   const [userName, setUserName] = useState('');
   const [room, setRoom] = useState('');
-  const [roomData, setRoomData] = useState({
-    users: []
-  });
+  const [roomData, setRoomData] = useState(null);
 
+  const [readyToPlay, setReadyToPlay] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
@@ -51,6 +44,7 @@ const Tetris = ({ auth, location }) => {
 
 
   console.log('re-render');
+
 
   useEffect(() => {
     socket = io(process.env.REACT_APP_SOCKET_URL);
@@ -63,15 +57,11 @@ const Tetris = ({ auth, location }) => {
     });
   }, []);
 
-
-
-
   useEffect(() => {
 
     if (!auth.user) {
       return undefined
     }
-
 
     setRoom(location.state.formData.roomName);
     setLevel(location.state.formData.level);
@@ -79,13 +69,9 @@ const Tetris = ({ auth, location }) => {
     console.log('Form data: ');
     console.log(location.state.formData);
 
- 
     setUserName(auth.user.name);
 
-
-
   }, [location.state.formData, auth.user]);
-
 
 
   useEffect(() => {
@@ -109,6 +95,25 @@ const Tetris = ({ auth, location }) => {
     });
 
   }, [userName, room])
+
+
+  // useEffect(() => {
+  //   console.log('Ready to play useEffect');
+  //   console.log(roomData);
+  //   if (!roomData) {
+  //     return undefined
+  //   }
+
+  //   if (roomData.users.length == roomData.users.nbPlayers) {
+  //     console.log(`Current users: ${roomData.users.length} vs Game users: ${location.state.formData.nbPlayers}`);
+  //     setReadyToPlay(true);
+  //   }
+
+  // }, [roomData])
+
+
+
+
 
   useEffect(() => {
     console.log('editUser useEffect');
@@ -250,7 +255,7 @@ const Tetris = ({ auth, location }) => {
                   </div>
                 )}
               <StartButton callback={pauseGame} text="Pause" />
-              <StartButton callback={startGame} text="Start game" />
+              <StartButton disabled={!readyToPlay} callback={startGame} text="Start game" />
             </aside>
           </StyledTetris>
         </div>

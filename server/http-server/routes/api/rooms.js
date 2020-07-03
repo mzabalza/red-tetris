@@ -23,6 +23,8 @@ router.post('/',
             return res.status(400).json({ errors: errors.array() })
         }
 
+        console.log(`Register Room: ${roomName}`);
+
         const { roomName, nbPlayers, level, masterUser } = req.body;
 
         try {
@@ -64,18 +66,20 @@ router.delete('/', [[
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log(errors);
+
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const { roomName } = req.body;
+    console.log(`Delete Room: ${roomName}`);
 
+    const { roomName } = req.body;
 
     // 1. See if room exists
     let room = await Room.findOne({ roomName });
     if (!room) {
         return res.status(400).json({ errors: [{ msg: 'Room doesnt exist' }] })
     }
-
 
     try {
         await Room.findOneAndRemove({ roomName });
@@ -91,6 +95,9 @@ router.delete('/', [[
 // @desc        Get all rooms
 // @access      Public
 router.get('/', async (req, res) => {
+
+    console.log(`Get all rooms`);
+
 
     try {
         const rooms = await Room.find();
@@ -109,7 +116,6 @@ router.get('/', async (req, res) => {
 // @desc        Get room properties
 // @access      Public
 router.get('/:roomName', async (req, res) => {
-
 
     try {
         const room = await Room.findOne({ roomName: req.params.roomName })
@@ -137,14 +143,16 @@ router.put('/',
         check("level", "level is required").not().isEmpty(),
     ],
     async (req, res) => {
-        console.log('put user in room')
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log(errors)
 
             return res.status(400).json({ errors: errors.array() })
         }
+
         const { socket, roomName, userName, score, level } = req.body;
+        console.log(`Put ${userName} user in room ${roomName}`)
+
 
         const user = { socket, userName, score, level };
 
@@ -157,6 +165,7 @@ router.put('/',
             index = room.users.findIndex(user => user.socket === socket);
 
             if (index === -1) {
+                console.log('pushing user');
                 room.users.unshift(user); // pushes to the beginning of an array
             } else {
                 console.log('User exists')
@@ -164,9 +173,11 @@ router.put('/',
                 room.users[index] = user
             };
 
-
             await room.save();
+            console.log('saved');
+
             res.json(room);
+
 
 
 
@@ -191,9 +202,8 @@ router.delete('/socket',
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() })
         }
-
         const { socket } = req.body;
-        console.log(req.body);
+        console.log(`Deleting user in room with socket: ${socket}`)
 
         try {
 
@@ -214,15 +224,19 @@ router.delete('/socket',
                 }))
             })
 
-            console.log(room_name_tmp, user_name_tmp)
+            console.log(room_name_tmp, user_name_tmp);
 
             if (!room_name_tmp) {
+                console.log(`User not found for socket id: ${socket}`);
                 res.json({ message: `User not found for socket id: ${socket}` })
             }
 
             const room_tmp = await Room.findOne({ roomName: room_name_tmp });
-            room_tmp.users = room_tmp.users.filter(user => user.socket != socket)
-            await room_tmp.save();
+            if (room_tmp) {
+                room_tmp.users = room_tmp.users.filter(user => user.socket != socket);
+                await room_tmp.save();
+
+            }
             res.json(room_tmp);
 
 

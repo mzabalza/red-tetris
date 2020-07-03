@@ -4,22 +4,6 @@ const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData }) => {
 
     const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        if (!socket) {
-            return undefined
-        }
-        // console.log('Users fuera de socket.on users');
-        // socket.on('room', ({ room }) => {
-        //     console.log('Room data: ');
-        //     console.log(room);
-        //     // setUsers(users);
-        // });
-        setUsers(roomData.users);
-        console.log('Users in sidebar!!!!:');
-        console.log(roomData.users);
-
-    }, [roomData]);
-
 
     const level = (nb) => {
         console.log('set Level in sidebar');
@@ -81,8 +65,8 @@ const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData }) => {
                         <div className="mgn-l-1">LEVEL</div>
                     </div>
                 </div>
-                {users ?
-                    users.map((user, x) => (
+                {roomData ?
+                    roomData.users.map((user, x) => (
                         <div key={x}>
                             <div className="user-item">
                                 <div>{x + 1}. {user.userName}</div>

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
-import io from 'socket.io-client';
 import axios from 'axios';
-
-
-let socket;
-
 
 
 Modal.setAppElement('#root');
@@ -27,26 +22,22 @@ const GameModal = ({ modalIsOpen, closeModal, masterUser }) => {
     console.log(`Master User ${masterUser}`);
 
 
-
-
     useEffect(() => {
-        socket = io(ENDPOINT);
-        console.log(socket);
+
         setFormData({
             ...formData,
             masterUser
         })
-        console.log(formData);
     }, []);
 
 
     const onSubmit = e => {
-        e.preventDefault();
-        socket.emit('createRoom', { masterUser, level, nbPlayers, roomName }, error => {
-            if (error) {
-                alert(error);
-            }
-        });
+        // e.preventDefault();
+        // socket.emit('createRoom', { masterUser, level, nbPlayers, roomName }, error => {
+        //     if (error) {
+        //         alert(error);
+        //     }
+        // });
 
 
 

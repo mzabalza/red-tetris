@@ -11,27 +11,11 @@ import Rooms from './Rooms';
 import { logout } from '../../actions/auth';
 
 
-
-
-
 const Home = ({ auth: { user }, logout }) => {
 
     console.log(user);
-
-    //////////////////////////////////////////////////////
-    // MODAL HANDLERS
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    // const [room, setRooms] = useState('');
-
     const [roomFlag, setRoomFlag] = useState(true);
-
-
-    const homeClick = e => {
-        console.log('clicking home click');
-
-    }
-
 
     const openModal = () => {
         setIsOpen(true);
@@ -39,8 +23,6 @@ const Home = ({ auth: { user }, logout }) => {
     const closeModal = () => {
         setIsOpen(false);
     }
-    //////////////////////////////////////////////////////  
-
 
     return (
         <div className="home">
