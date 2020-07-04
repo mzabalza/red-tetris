@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData }) => {
+const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData, addGreyBlock }) => {
 
     const [users, setUsers] = useState([]);
 
@@ -60,7 +60,7 @@ const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData }) => {
                     <span className="user-nav__notification">GREY BLOCKS</span>
                 </div>
                 <div>
-                    <div className='btn-conf btn-conf--green' onClick={() => setScore(prev => prev + 100)}>
+                    <div className='btn-conf btn-conf--green' onClick={() => addGreyBlock()}>
                         <i className="fas fa-arrow-up"></i>
                     </div>
                     <div className='btn-conf btn-conf--red' onClick={() => setScore(prev => prev - 100)}>

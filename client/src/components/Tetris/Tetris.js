@@ -55,7 +55,7 @@ const Tetris = ({ auth, location }) => {
       setRoomData(room);
     });
 
-    socket.on('startGame',() => {
+    socket.on('startGame', () => {
       startGame()
     });
 
@@ -93,6 +93,17 @@ const Tetris = ({ auth, location }) => {
 
   }, [roomData])
 
+  // useEffect(() => {
+  //   if (rowsCleared) {
+  //     setStage(prevStage => {
+  //       prevStage.push(new Array(prevStage[0].length).fill(['T', 'clear']))
+  //       return prevStage
+  //     });
+  //   }
+
+  // }, [rowsCleared]);
+
+
 
 
 
@@ -122,6 +133,17 @@ const Tetris = ({ auth, location }) => {
 
   }, [score, level]);
 
+  const addGreyBlock = () => {
+    console.log('Add grey Block');
+    setStage(prevStage => {
+      prevStage.push(new Array(prevStage[0].length).fill(['G', 'merged']))
+      prevStage.shift();
+      return prevStage
+    });
+
+  };
+
+
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
@@ -140,7 +162,7 @@ const Tetris = ({ auth, location }) => {
   };
 
   const startGame2 = () => {
-    socket.emit('startGame', {room})
+    socket.emit('startGame', { room })
   };
 
   const pauseGame = () => {
@@ -225,6 +247,7 @@ const Tetris = ({ auth, location }) => {
             setLevel={setLevel}
             setDropTime={setDropTime}
             setScore={setScore}
+            addGreyBlock={addGreyBlock}
           />
           <StyledTetris>
             <Stage stage={stage} />

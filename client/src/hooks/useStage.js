@@ -1,27 +1,31 @@
 import { useState, useEffect } from 'react';
 import { createStage } from '../gameHelpers';
 
-export const useStage  = (player, resetPlayer) => {
+export const useStage = (player, resetPlayer) => {
     const [stage, setStage] = useState(createStage());
     const [rowsCleared, setRowsCleared] = useState(0);
 
     useEffect(() => {
         setRowsCleared(0);
 
-        const sweepRows = newStage =>
+        const sweepRows = stage => {
+
             // ack: accumulator
-            newStage.reduce((ack, row) => {
+            const newStage = stage.reduce((ack, row) => {
                 // .findIndex:  returns the positioon of the matching function provided
                 //              returns -1 if not match founded
                 if (row.findIndex(cell => cell[0] === 0) === -1) {
+                    if (row.findIndex(cell => cell[0] === 'G') != -1) {
+                        ack.push(row);
+                        return ack;
+                    }
                     console.log('Remove ROW!!');
                     setRowsCleared(prev => prev + 1);
                     // .unshift allows us to add a value at the beginning of the array
-                    // ack.unshift(new Array(newStage[0].length).fill([0, 'clear']));
+                    ack.unshift(new Array(stage[0].length).fill([0, 'clear']));
                     // ack.unshift(new Array(newStage[0].length).fill([0, 'clear']));
 
                     // We didnt push the current row to the ack so that means we delete it.
-                    newStage.push(new Array(newStage[0].length).fill(['T', 'clear']));
                     return ack;
                 }
                 // If we dont find a row that should be cleared we just push the row into the accumulator array
@@ -31,9 +35,18 @@ export const useStage  = (player, resetPlayer) => {
 
             }, []) // ???
 
+
+
+
+
+            return newStage
+
+        }
+
+
         const updateStage = prevStage => {
             // First flush the stage
-            const newStage = prevStage.map(row => 
+            const newStage = prevStage.map(row =>
                 row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)),
             );
 
@@ -49,7 +62,7 @@ export const useStage  = (player, resetPlayer) => {
                 });
             });
             // Then check if we collided
-            if (player.collided) { 
+            if (player.collided) {
                 resetPlayer();
                 return sweepRows(newStage);
 
@@ -61,5 +74,5 @@ export const useStage  = (player, resetPlayer) => {
         setStage(prev => updateStage(prev));
     }, [player, resetPlayer]);
 
-    return [stage, setStage, rowsCleared]; 
+    return [stage, setStage, rowsCleared];
 };
