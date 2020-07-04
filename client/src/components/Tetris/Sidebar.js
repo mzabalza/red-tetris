@@ -55,6 +55,19 @@ const Sidebar = ({ setDropTime, setLevel, setScore, socket, roomData }) => {
                     </div>
                 </div>
             </header>
+            <header className="header header--sidebar">
+                <div className="user-nav__box">
+                    <span className="user-nav__notification">GREY BLOCKS</span>
+                </div>
+                <div>
+                    <div className='btn-conf btn-conf--green' onClick={() => setScore(prev => prev + 100)}>
+                        <i className="fas fa-arrow-up"></i>
+                    </div>
+                    <div className='btn-conf btn-conf--red' onClick={() => setScore(prev => prev - 100)}>
+                        <i className="fas fa-arrow-down"></i>
+                    </div>
+                </div>
+            </header>
 
 
             <div className="my-t3 my-b3 p-2">

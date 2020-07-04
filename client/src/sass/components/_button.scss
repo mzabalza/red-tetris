@@ -78,8 +78,11 @@
     border-radius: 0.2rem;
     margin: 0.2rem;
 
+
     // font-size: var(--font-size-medium);
     border: none;
+
+ 
 
     &--red {
         background: var(--color-red-dark-1);
@@ -95,6 +98,12 @@
         background:#009879;
 
         color: var(--color-white);
+
+        &--disabled {
+            opacity: 0.4;
+            background:#009879;
+
+        }
     }
 
     &--grey {

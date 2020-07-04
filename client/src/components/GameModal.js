@@ -61,11 +61,7 @@ const GameModal = ({ modalIsOpen, closeModal, masterUser }) => {
 
     const createGame = async (e) => {
         console.log('clicked create game button');
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
+        const config = { headers: { 'Content-Type': 'application/json' }}
         const body = { masterUser, roomName, nbPlayers, level };
 
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/room`, body, config);

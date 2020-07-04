@@ -53,8 +53,12 @@ const Tetris = ({ auth, location }) => {
       console.log('Room data: ');
       console.log(room);
       setRoomData(room);
-      // setUsers(users);
     });
+
+    socket.on('startGame',() => {
+      startGame()
+    });
+
   }, []);
 
   useEffect(() => {
@@ -75,42 +79,19 @@ const Tetris = ({ auth, location }) => {
 
 
   useEffect(() => {
-    console.log('put user useEffect');
-
-    if (!userName | !room) {
+    console.log('Ready to play useEffect');
+    console.log(roomData);
+    if (!roomData) {
       return undefined
     }
+    console.log(roomData.users.length, roomData.nbPlayers);
 
-    const body = {
-      roomName: room,
-      userName: userName,
-      score,
-      level,
-    };
+    if (roomData.users.length == roomData.nbPlayers) {
+      console.log(`Current users: ${roomData.users.length} vs Game users: ${location.state.formData.nbPlayers}`);
+      setReadyToPlay(true);
+    }
 
-    socket.emit('addUser', { body }, (error) => {
-      if (error) {
-        alert(error);
-      }
-    });
-
-  }, [userName, room])
-
-
-  // useEffect(() => {
-  //   console.log('Ready to play useEffect');
-  //   console.log(roomData);
-  //   if (!roomData) {
-  //     return undefined
-  //   }
-
-  //   if (roomData.users.length == roomData.users.nbPlayers) {
-  //     console.log(`Current users: ${roomData.users.length} vs Game users: ${location.state.formData.nbPlayers}`);
-  //     setReadyToPlay(true);
-  //   }
-
-  // }, [roomData])
-
+  }, [roomData])
 
 
 
@@ -131,7 +112,6 @@ const Tetris = ({ auth, location }) => {
     };
 
     console.log(body)
-    // socket.emit('addUser', { userName, room, score, level });
     socket.emit('addUser', { body }, (error) => {
       if (error) {
         alert(error);
@@ -155,7 +135,12 @@ const Tetris = ({ auth, location }) => {
     resetPlayer();
     setRows(0);
     setGameOver(false);
+
     // pauseGame();
+  };
+
+  const startGame2 = () => {
+    socket.emit('startGame', {room})
   };
 
   const pauseGame = () => {
@@ -255,7 +240,7 @@ const Tetris = ({ auth, location }) => {
                   </div>
                 )}
               <StartButton callback={pauseGame} text="Pause" />
-              <StartButton disabled={!readyToPlay} callback={startGame} text="Start game" />
+              <StartButton disabled={!readyToPlay} callback={startGame2} text="Start game" />
             </aside>
           </StyledTetris>
         </div>

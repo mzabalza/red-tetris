@@ -58,8 +58,8 @@ const Rooms = ({ modalIsOpen }) => {
                 <Link
                     name={room.roomName}
                     onClick={e => setFlag(!flag)}
-                    className="btn-conf btn-conf--green-blue"
-                    to={{
+                    className={(room.users.length != room.nbPlayers) ? "btn-conf btn-conf--green-blue" : "btn-conf btn-conf--green-blue--disabled"}
+                    to={ (room.users.length != room.nbPlayers) ? {
                         pathname: "/tetris", state: {
                             formData: {
                                 name: null,
@@ -68,9 +68,9 @@ const Rooms = ({ modalIsOpen }) => {
                                 level: room.level
                             }
                         }
-                    }}
+                    } : '#'}
                 >
-                    Join
+                    {(room.users.length != room.nbPlayers) ? 'Join' : 'Full'}
                 </Link>
                 <button name={room.roomName} onClick={e => removeRoom(e)} className="btn-conf btn-conf--red">X</button>
             </td>

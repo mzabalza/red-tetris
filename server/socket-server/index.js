@@ -73,6 +73,11 @@ io.on('connection', (socket) => {
         }
 
     });
+    ///////////////////////////////////////////////////////////////////////////
+    // START GAME
+    socket.on('startGame', ({ room }) => {
+        io.to(room).emit('startGame');
+    })
 
     // socket.on('disconnect', () => {
     //     const user = removeUser(socket.id);

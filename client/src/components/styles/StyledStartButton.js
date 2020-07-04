@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledStartButton = styled.button.attrs(props => ({
-    disabled: props.disabled ? true : 'true',
+    // disabled: props.disabled ? 'true' : false,
+    disabled: props.disabled,
 }))`
     box-sizing: border-box;
     margin: 0 0 20px 0;

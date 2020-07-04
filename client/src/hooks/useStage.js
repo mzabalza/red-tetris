@@ -17,13 +17,17 @@ export const useStage  = (player, resetPlayer) => {
                     console.log('Remove ROW!!');
                     setRowsCleared(prev => prev + 1);
                     // .unshift allows us to add a value at the beginning of the array
-                    ack.unshift(new Array(newStage[0].length).fill([0, 'clear']));
+                    // ack.unshift(new Array(newStage[0].length).fill([0, 'clear']));
+                    // ack.unshift(new Array(newStage[0].length).fill([0, 'clear']));
+
                     // We didnt push the current row to the ack so that means we delete it.
+                    newStage.push(new Array(newStage[0].length).fill(['T', 'clear']));
                     return ack;
                 }
                 // If we dont find a row that should be cleared we just push the row into the accumulator array
                 ack.push(row);
                 return ack;
+
 
             }, []) // ???
 
