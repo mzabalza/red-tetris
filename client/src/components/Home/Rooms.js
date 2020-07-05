@@ -42,10 +42,6 @@ const Rooms = ({ modalIsOpen }) => {
         };
     }
 
-    useEffect(() => {
-        console.log(flag);
-    }, [flag]);
-
     // TODO: Add createdAt
 
     const rows = rooms.map(room => (
