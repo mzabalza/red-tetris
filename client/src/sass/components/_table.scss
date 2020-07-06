@@ -1,17 +1,25 @@
 
 .content-table {
     border-collapse: collapse;
-    color: var(--color-grey-medium-1);
+    color: var(--color-grey-dark-1);
     // margin: 25px 0;
     font-size: 1.4rem;
     min-width: 400px;
     // border-radius: 5px 5px 0 0;
     overflow: hidden;
-    box-shadow: 0 6rem 6rem rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
   }
   
 .content-table thead tr {
   background-color: #009879;
+  background-color: var(--color-salmon-2);
+  background-color: var(--color-grey-medium-3);
+  background-color: var(--color-red-dark-1);
+  background-color: var(--color-salmon);
+
+
+
+  // --color-salmon
   color: #ffffff;
   text-align: left;
   font-weight: bold;

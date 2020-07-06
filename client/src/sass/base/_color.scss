@@ -5,19 +5,28 @@
 
     // WHITE-GREY-BLACK
     --color-white: #fff;
-    --color-white-1: #f7f7f7;
-    --color-grey-light-1: #ece9e9;
-    --color-grey-medium-1: #9b9b9b;
+    --color-white-1: rgb(250, 250, 250);
+    --color-white-2: #f7f7f7;
+    --color-grey-light-1: #d3d3d3;
+    --color-grey-medium-1: #b4b4b4;
     --color-grey-medium-2: #5e5e5e;
     --color-grey-medium-3: #414141;
-    --color-grey-dark-1: #1a1a1a;
+    --color-grey-dark-1: #202020;
     --color-grey-dark-2: #0f0f0f;
+
+    --color-grey-medium-1: rgb(180, 180, 180);
+
 
     // RED
     --color-red-light-1: #ff8181;
     --color-red-medium-1: #ff5757;
     --color-red-dark-1: #ff1f1f;
     --color-red-dark-2: #970b0b;
+
+    //SALMON
+    --color-salmon: rgb(253, 104, 84);
+    --color-salmon-2: rgb(255, 59, 20);
+    --color-salmon-3: rgb(150, 29, 5);
 
     // GREEN
     --color-green-light-1: #a5e985;

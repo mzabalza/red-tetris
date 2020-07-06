@@ -46,7 +46,7 @@ const Login = ({ login, isAuthenticated }) => {
                     />
                 </div>
                 <div className="u-center-text u-margin-top-medium">
-                    <input className="btn btn--dinamic" type="submit" value="submit" />
+                    <input className="btn btn--dinamic" type="submit" value="SIGN IN" />
                 </div>
             </form>
         </div>

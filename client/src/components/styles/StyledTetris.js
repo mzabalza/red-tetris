@@ -10,6 +10,8 @@ export const StyledTetrisWrapper = styled.div`
     
     // background: url(${bgImage}) #000;
     // background-image: linear-gradient(to right bottom, var(--color-grey-dark-1), var(--color-grey-dark-3));
+    background-color: var(--color-grey-dark-2);
+
     // background-size: cover;
     overflow: hidden;
 `;

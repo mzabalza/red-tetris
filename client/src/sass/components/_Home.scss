@@ -1,5 +1,7 @@
 .home {
-    background-color: #312E2B;
+    // background-color: #312E2B;
+    background-image: linear-gradient(to right bottom, var(--color-white-1), var(--color-grey-light-1));
+
     min-height: 100vh;
     color: white;
     display: flex;
@@ -7,6 +9,8 @@
 
 .sidebar-home {
     background-color: #272522;
+    box-shadow: 1rem 0rem 3rem 0rem rgba(0, 0, 0, 0.3);
+
     flex: 1;
     max-width: 20rem;
 
@@ -20,15 +24,17 @@
     }
 
     .ul {
-        margin-top: 2rem;
         display: flex;
         flex-direction: column;
+        margin: 2rem 1rem 0 1rem;
+
         .item {
             font-size: 1.4rem;
             display: flex;
             align-items: center;
             justify-content: space-around;
-            // margin-top: 3rem;
+            border-bottom: 2px solid rgba(180, 180, 180, 0.15);
+  
             padding: 2rem 4rem;
             &:hover {
                 background-color: #464341;
@@ -42,6 +48,7 @@
     flex: 4;
     display: flex;
     flex-direction: column;
+
 
     .item {
         font-size: 1.6rem;

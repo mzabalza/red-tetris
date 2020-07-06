@@ -7,7 +7,6 @@ const Landing = () => {
 
     return (
         <Fragment>
-            <h1 className="title">TETRIS</h1>
             <div className="container-landing">
                 <Link className="link" to="/login">
                     <div className="nav-box nav-box--blue">

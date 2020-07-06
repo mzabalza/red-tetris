@@ -16,11 +16,17 @@
     // background-color: var(--color-grey-medium-3);
     background-color: var(--color-grey-dark-1);
     color: var(--color-white-1);
+    background-color: #ff3b1473;
+    // background-image: linear-gradient(to right bottom, var(--color-salmon), rgba(255, 59, 20, 0.45));
+
+    // color: var(--color-salmon-2);
 
     // FLEXBOX
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // border-bottom: 2px solid var(--color-salmon);
+
 
     &--sidebar {
         padding: 1rem;

@@ -9,6 +9,11 @@
   font-family: 'Roboto', sans-serif;
   font-family:  Pixel, Arial, Helvetica, sans-serif;
 
+  // background-image: linear-gradient(to top, var(--color-blue-disney), var(--color-blue-disney-light));
+  // box-shadow: 10rem 10rem 40rem -10rem rgba(0,0,0,0.75);
+  background-size: cover;
+
+
 
   ///////////////////////////////////
   // Center box in the middle
@@ -17,13 +22,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   
-  border-radius: 1rem;
-  background-image: linear-gradient(to top, var(--color-blue-disney), var(--color-blue-disney-light));
+  // border-radius: 1rem;
 
   display:flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
 
   padding: 8rem;
   width: 50rem;
@@ -55,9 +60,10 @@
   border: 0.15rem solid var(--color-grey-medium-1);
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background-color: var(--color-blue-disney-dark);
-  min-width: 2rem;
+  background-color: var(--color-blue-disney-light);
   width: 16vw;
+  min-width: 20rem;
+
 
   &:focus {
     outline:0;
