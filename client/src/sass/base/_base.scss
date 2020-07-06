@@ -24,7 +24,9 @@ body {
     // color: var(--color-grey-dark-2);
     // background: url('../../img/background_disney.png');
     // background-image: linear-gradient(to right bottom, var(--color-blue-disney), var(--color-blue-disney-light));
-    background-color: var(--color-blue-disney);
+    // background-color: var(--color-grey-medium-3);
+    background-image: linear-gradient(to right bottom, var(--color-grey-medium-3), var(--color-grey-dark-1));
+
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -33,6 +35,6 @@ body {
 }
 
 .content {
-    background: url('../../img/background_disney.png');
+    // background: url('../../img/background_disney.png');
     display: flex;
 }
