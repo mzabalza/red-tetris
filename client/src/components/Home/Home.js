@@ -27,7 +27,7 @@ const Home = ({ auth: { user }, logout }) => {
     };
 
     const onError = () => {
-        setErrors(prev => ([...prev, 'mikel']));
+        setErrors(prev => ([...prev, 'Error: New error fetching data from rooms']));
     };
 
 
