@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import bgImage from '../../img/bg.png';
 
 export const StyledTetrisWrapper = styled.div`
-    outline: 0;
+    // outline: 0;
 
-    width: 100vw;
+    min-height: 100vh;
+
+
+    // width: 100vw;
     height: 100vh;
     
     // background: url(${bgImage}) #000;
     // background-image: linear-gradient(to right bottom, var(--color-grey-dark-1), var(--color-grey-dark-3));
     background-color: var(--color-grey-dark-2);
 
-    // background-size: cover;
+    background-size: cover;
     overflow: hidden;
 `;
 
