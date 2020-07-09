@@ -10,9 +10,10 @@ import Error from '../Error/Error';
 
 // ACTIONS
 import { logout } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
 
 
-const Home = ({ auth: { user }, logout }) => {
+const Home = ({ auth: { user }, logout, alerts, setAlert}) => {
 
     console.log(user);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -27,14 +28,16 @@ const Home = ({ auth: { user }, logout }) => {
     };
 
     const onError = () => {
-        setErrors(prev => ([...prev, 'Error: New error fetching data from rooms']));
+        // setErrors(prev => ([...prev, 'Error: New error fetching data from rooms']));
+        setAlert('Error: Testing error with redux', 'Error', 2000);
+
     };
 
 
     return (
         <div>
             <div>
-                {errors.length ? <Error className="error" errors={errors} /> : null}
+                {alerts.length ? <Error className="error" errors={alerts} /> : null}
             </div>
             <div className="home">
                 <div className="sidebar-home">
@@ -94,7 +97,8 @@ const Home = ({ auth: { user }, logout }) => {
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    alerts: state.alert
 })
 
-export default connect(mapStateToProps, { logout })(Home);
+export default connect(mapStateToProps, { logout, setAlert })(Home);
