@@ -5,6 +5,7 @@
   // FONT
   font-size: 2.2rem;
   font-weight: 300;
+
   // letter-spacing: 1.2px;
   font-family: 'Roboto', sans-serif;
   font-family:  Pixel, Arial, Helvetica, sans-serif;
@@ -36,10 +37,15 @@
 }
 
 .login-title {
+  text-shadow: 1px 1px 2rem var(--color-salmon-2);
+  color:  var(--color-salmon-2);
   text-transform: uppercase;
-  color: var(--color-white);
   // font-weight: 800;
-  font-size: 3rem;
+  font-size: 6rem;
+  font-family: Audiowide;
+  margin-bottom: 3rem;
+  // font-weight: 800;
+
 
   /* letter-spacing: .2rem; */
 }
@@ -48,6 +54,7 @@
 
 /* Forms */
 .form {
+
 
 }
 

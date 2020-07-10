@@ -9,16 +9,20 @@
 .sidebar-home {
     background-color: #272522;
     box-shadow: 1rem 0rem 3rem 0rem rgba(0, 0, 0, 0.3);
+    font-family: Audiowide;
+
 
     flex: 1;
     max-width: 20rem;
 
     .sidebar-title {
-        color:  #009879;
+        // text-shadow: 1px 1px 2px red;
+        text-shadow: 1px 1px 1rem var(--color-salmon-2);
+        color:  var(--color-salmon-2);
         display: flex;
         align-items: center;
         justify-content: space-around;
-        font-size: 1.8rem;
+        font-size: 3rem;
         margin-top: 3rem;
     }
 

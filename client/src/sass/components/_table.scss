@@ -5,6 +5,7 @@
     // margin: 25px 0;
     font-size: 1.4rem;
     min-width: 400px;
+    font-family: Audiowide;
     // border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
@@ -16,13 +17,17 @@
   background-color: var(--color-grey-medium-3);
   background-color: var(--color-red-dark-1);
   background-color: var(--color-salmon);
+  background-color: var(--color-salmon-2);
+  background-color: rgba(255, 59, 20, 0.9);
 
 
 
   // --color-salmon
   color: #ffffff;
   text-align: left;
-  font-weight: bold;
+  // font-weight: bold;
+  padding: 20px 20px;
+
 }
 
 .content-table th,
@@ -39,7 +44,8 @@
 //   }
 
 .content-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  // border-bottom: 2px solid #009879;
+  border-bottom: 2px solid var(--color-salmon-2);
 }
 .content-table th:last-of-type {
   // border-bottom: 2px solid #009879;

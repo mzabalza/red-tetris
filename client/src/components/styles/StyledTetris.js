@@ -20,7 +20,8 @@ export const StyledTetrisWrapper = styled.div`
 `;
 
 export const StyledTetris = styled.div`
-    // background-color: red
+    font-family: Audiowide;
+
     flex: 5;
     display: flex;
     align-items: flex-start;
