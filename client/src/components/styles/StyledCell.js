@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledCell = styled.div`
-    width: auto;
+    // width: auto;
+    // height: auto;
     // mind-with: 20rem;
     background: rgba(${props => props.color}, 0.2);
     border: ${props => props.type === 0 ? '0px' : '4px solid'};
