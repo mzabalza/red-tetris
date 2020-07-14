@@ -43,15 +43,15 @@ const Tetris = ({ auth, location }) => {
   const [dropTime, setDropTime] = useDropTime(null);
 
 
-  console.log('re-render');
+  // console.log('re-render');
 
 
   useEffect(() => {
     socket = io(process.env.REACT_APP_SOCKET_URL);
 
     socket.on('room', ({ room }) => {
-      console.log('Room data: ');
-      console.log(room);
+      // console.log('Room data: ');
+      // console.log(room);
       setRoomData(room);
     });
 
@@ -70,8 +70,8 @@ const Tetris = ({ auth, location }) => {
     setRoom(location.state.formData.roomName);
     setLevel(location.state.formData.level);
 
-    console.log('Form data: ');
-    console.log(location.state.formData);
+    // console.log('Form data: ');
+    // console.log(location.state.formData);
 
     setUserName(auth.user.name);
 
@@ -79,12 +79,11 @@ const Tetris = ({ auth, location }) => {
 
 
   useEffect(() => {
-    console.log('Ready to play useEffect');
-    console.log(roomData);
+    // If All players ready, play!
+
     if (!roomData) {
       return undefined
     }
-    console.log(roomData.users.length, roomData.nbPlayers);
 
     if (roomData.users.length == roomData.nbPlayers) {
       console.log(`Current users: ${roomData.users.length} vs Game users: ${location.state.formData.nbPlayers}`);
@@ -103,12 +102,8 @@ const Tetris = ({ auth, location }) => {
 
   // }, [rowsCleared]);
 
-
-
-
-
   useEffect(() => {
-    console.log('editUser useEffect');
+    // console.log('editUser useEffect');
 
 
     if (!userName | !room) {
@@ -122,7 +117,7 @@ const Tetris = ({ auth, location }) => {
       level,
     };
 
-    console.log(body)
+    // console.log(body)
     socket.emit('addUser', { body }, (error) => {
       if (error) {
         alert(error);
@@ -134,7 +129,7 @@ const Tetris = ({ auth, location }) => {
   }, [score, level]);
 
   const addGreyBlock = () => {
-    console.log('Add grey Block');
+    // console.log('Add grey Block');
     setStage(prevStage => {
       prevStage.push(new Array(prevStage[0].length).fill(['G', 'merged']))
       prevStage.shift();
@@ -166,17 +161,17 @@ const Tetris = ({ auth, location }) => {
   };
 
   const pauseGame = () => {
-    console.log(`Level: ${level}`);
-    console.log(`BEFORE: ${dropTime}`);
+    // console.log(`Level: ${level}`);
+    // console.log(`BEFORE: ${dropTime}`);
     dropTime ? setDropTime(null) : setDropTime(1000 - ((level) * 100));
-    console.log(`AFTER: ${dropTime}`);
+    // console.log(`AFTER: ${dropTime}`);
   };
 
   const drop = () => {
     // if (!dropTime) {
     //   return
     // }
-    console.log('drop');
+    // console.log('drop');
 
     // console.log(`Droptime: ${dropTime}`);
     // Increase level when player has cleared 10 rows
@@ -250,22 +245,35 @@ const Tetris = ({ auth, location }) => {
             addGreyBlock={addGreyBlock}
           />
           <StyledTetris>
-            <Stage stage={stage} />
+            <div className="wrapper">
+              <Stage stage={stage} size={1}/>
+            </div>
             <aside>
-              {gameOver ? (
-                <Display gameOver={gameOver} text="Game Over" />
-              ) : (
-                  <div>
-                    <Display text={`Score: ${score}`} />
-                    <Display text={`Rows: ${rows}`} />
-                    <Display text={`Level: ${level}`} />
-                    <Display text={`Speed: ${dropTime}`} />
-                  </div>
-                )}
-              <StartButton callback={pauseGame} text="Pause" />
-              <StartButton disabled={!readyToPlay} callback={startGame2} text="Start game" />
-            </aside>
+                {gameOver ? (
+                  <Display gameOver={gameOver} text="Game Over" />
+                ) : (
+                    <div>
+                      <Display text={`Score: ${score}`} />
+                      <Display text={`Rows: ${rows}`} />
+                      <Display text={`Level: ${level}`} />
+                      <Display text={`Speed: ${dropTime}`} />
+                    </div>
+                  )}
+                <StartButton callback={pauseGame} text="Pause" />
+                <StartButton disabled={!readyToPlay} callback={startGame2} text="Start game" />
+              </aside>
+
+
+            
           </StyledTetris>
+
+          <StyledTetris>
+            <Stage stage={stage} size={2}/>
+          </StyledTetris>
+
+
+
+
         </div>
 
       </StyledTetrisWrapper>

@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { login } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import Error from '../Error/Error';
 
-const Login = ({ login, isAuthenticated }) => {
+
+// ACTIONS
+import { login } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
+
+
+
+const Login = ({ login, isAuthenticated, alerts, setAlert }) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -21,8 +29,9 @@ const Login = ({ login, isAuthenticated }) => {
     };
 
     const onSubmit = async e => {
-        console.log('button pressed');
         e.preventDefault();
+
+        console.log('button pressed');
         login({ name, password });
     }
 
@@ -32,29 +41,36 @@ const Login = ({ login, isAuthenticated }) => {
     }
 
     return (
-        <div className="container">
-            <div className="login-title">LOGIN</div>
-            <form className="flex-col-1 form u-margin-top-medium" onSubmit={e => onSubmit(e)}>
-                <div className="form-group">
-                    <input className="input" type="text" name="name" placeholder="NAME" autoComplete="off"
-                        onChange={e => onChange(e)}
-                    />
-                </div>
-                <div className="my-t1">
-                    <input className="input" type="password" name="password" placeholder="PASSWORD" autoComplete="off"
-                        onChange={e => onChange(e)}
-                    />
-                </div>
-                <div className="u-center-text u-margin-top-medium">
-                    <input className="btn btn--dinamic" type="submit" value="SIGN IN" />
-                </div>
-            </form>
+        <div>
+            <div>
+                {alerts.length ? <Error className="error" errors={alerts} /> : null}
+            </div>
+            <div className="container">
+
+                <div className="login-title">LOGIN</div>
+                <form className="flex-col-1 form u-margin-top-medium" onSubmit={e => onSubmit(e)}>
+                    <div className="form-group">
+                        <input className="input" type="text" name="name" placeholder="NAME" autoComplete="off"
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className="my-t1">
+                        <input className="input" type="password" name="password" placeholder="PASSWORD" autoComplete="off"
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className="u-center-text u-margin-top-medium">
+                        <input className="btn btn--dinamic" type="submit" value="SIGN IN" />
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    alerts: state.alert
 })
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, setAlert })(Login);

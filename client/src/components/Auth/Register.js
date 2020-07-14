@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { register } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import Error from '../Error/Error';
 
-const Register = ({ register, isAuthenticated }) => {
+
+const Register = ({ register, isAuthenticated, alerts }) => {
 
     const [formData, setFormData] = useState({
         name: null,
@@ -40,34 +42,42 @@ const Register = ({ register, isAuthenticated }) => {
     }
 
     return (
-        <div className="container">
-            <div className="login-title">REGISTER</div>
-            <form className="flex-col-1 form u-margin-top-medium" onSubmit={e => onSubmit(e)}>
-                <div className="form-group">
-                    <input className="input" type="text" name="name" placeholder="NAME" autoComplete="off"
-                        onChange={e => onChange(e)}
-                    />
-                </div>
-                <div className="my-t1">
-                    <input className="input" type="password" name="password" placeholder="PASSWORD" autoComplete="off"
-                        onChange={e => onChange(e)}
-                    />
-                </div>
-                <div className="my-t1">
-                    <input className="input" type="password" name="password2" placeholder="REPEAT PASSWORD" autoComplete="off"
-                        onChange={e => onChange(e)}
-                    />
-                </div>
+        <div>
+            <div>
+                {alerts.length ? <Error className="error" errors={alerts} /> : null}
+            </div>
+            <div className="container">
+                <div className="login-title">REGISTER</div>
+                <form className="flex-col-1 form u-margin-top-medium" onSubmit={e => onSubmit(e)}>
+                    <div className="form-group">
+                        <input className="input" type="text" name="name" placeholder="NAME" autoComplete="off"
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className="my-t1">
+                        <input className="input" type="password" name="password" placeholder="PASSWORD" autoComplete="off"
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className="my-t1">
+                        <input className="input" type="password" name="password2" placeholder="REPEAT PASSWORD" autoComplete="off"
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
 
-                <div className="u-center-text u-margin-top-medium">
-                    <input className="btn btn--dinamic" type="submit" value="submit" />
-                </div>
-            </form>
+                    <div className="u-center-text u-margin-top-medium">
+                        <input className="btn btn--dinamic" type="submit" value="submit" />
+                    </div>
+                </form>
+            </div>
         </div>
+
     )
 }
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    alerts: state.alert
+
 })
 
 // connect(state, actions)

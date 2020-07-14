@@ -5,7 +5,7 @@ export function useInterval(callback, delay) {
   // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
-    console.log(callback.current);
+    // console.log(callback.current);
   }, [callback]);
 
   //////////////////////////////////////////////////
