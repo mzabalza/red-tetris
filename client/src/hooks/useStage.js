@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createStage } from '../gameHelpers';
 
-export const useStage = (player, resetPlayer) => {
+export const useStage = (player, resetPlayer, socket) => {
     const [stage, setStage] = useState(createStage());
     const [rowsCleared, setRowsCleared] = useState(0);
 
@@ -63,7 +63,9 @@ export const useStage = (player, resetPlayer) => {
             });
             // Then check if we collided
             if (player.collided) {
-                resetPlayer();
+                // resetPlayer();
+                socket.emit('resetTetromino');
+
                 return sweepRows(newStage);
 
             }

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 
-import { createStage, checkCollision } from '../../gameHelpers';
+import { STAGE_WIDTH, createStage, checkCollision } from '../../gameHelpers';
+
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from '../styles/StyledTetris';
@@ -22,6 +23,16 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import { configure } from '@testing-library/react';
 
+////////////////////////////////////////////////////////
+// roomData = {
+//
+//
+//
+//
+// }
+//
+
+
 let socket;
 
 // TODO: PUT ALL FUNCIONTS IN DIFFERENT FILES
@@ -36,8 +47,9 @@ const Tetris = ({ auth, location }) => {
   const [readyToPlay, setReadyToPlay] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
-  const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-  const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
+
+  const [player, setPlayer, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
+  const [stage, setStage, rowsCleared] = useStage(player, resetPlayer, socket);
   const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
   // const [dropTime, setDropTime] = useDropTime(level);
   const [dropTime, setDropTime] = useDropTime(null);
@@ -49,14 +61,23 @@ const Tetris = ({ auth, location }) => {
     socket = io(process.env.REACT_APP_SOCKET_URL);
 
     socket.on('room', ({ room }) => {
-      // console.log('Room data: ');
-      // console.log(room);
       setRoomData(room);
     });
 
     socket.on('startGame', () => {
       startGame()
     });
+
+    // socket.on('stage', ({ stage }) => {
+    //   setStage(stage);
+    // })
+    socket.on('resetTetromino', ({ tetromino }) => {
+      setPlayer({
+        pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+        tetromino: tetromino.shape,
+        collided: false,
+    })
+    })
 
   }, []);
 
@@ -68,17 +89,12 @@ const Tetris = ({ auth, location }) => {
 
     setRoom(location.state.formData.roomName);
     setLevel(location.state.formData.level);
-
-    // console.log('Form data: ');
-    // console.log(location.state.formData);
-
     setUserName(auth.user.name);
 
   }, [location.state.formData, auth.user]);
 
 
   useEffect(() => {
-    // If All players ready, play!
 
     if (!roomData) {
       return undefined
@@ -146,9 +162,10 @@ const Tetris = ({ auth, location }) => {
 
   const startGame = () => {
     // Reset everything
-    setStage(createStage());
+    // setStage(createStage());
     setDropTime(1000 - ((level) * 100));
-    resetPlayer();
+    // resetPlayer();
+    socket.emit('resetTetromino');
     setRows(0);
     setGameOver(false);
 

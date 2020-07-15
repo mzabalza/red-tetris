@@ -5,9 +5,12 @@ const socketio = require('socket.io');
 const http = require('http');
 
 const connectDB = require("./config/db");
+const logger = require('./config/logger');
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const { getRooms, addRoom, getRoom } = require('./rooms');
+const { createStage } = require('./gameHelpers/gameHelpers');
+const { randomTetromino, TETROMINOS } = require('./gameHelpers/tetrominos');
 
 
 const PORT = process.env.PORT || 5003;
@@ -23,6 +26,7 @@ connectDB();
 
 
 io.on('connection', (socket) => {
+    logger.log('info', `connection: socket ${socket.id}`);
     console.log(`New WebSocket connection ${socket.id}`)
 
     ///////////////////////////////////////////////////////////////////////////
@@ -62,6 +66,7 @@ io.on('connection', (socket) => {
     ///////////////////////////////////////////////////////////////////////////
     // REMOVE USER FROM ROOM WHEN DISCONNECT
     socket.on('disconnect', async () => {
+        logger.log('info', `disconnect: socket ${socket.id}`);
         console.log(`Socket ${socket.id} disconnected.`);
 
         try {
@@ -77,6 +82,19 @@ io.on('connection', (socket) => {
     // START GAME
     socket.on('startGame', ({ room }) => {
         io.to(room).emit('startGame');
+    })
+
+    socket.on('createStage', () => {
+        const stage = createStage();
+        io.to(room).emit('stage', { stage });
+    })
+    ///////////////////////////////////////////////////////////////////////////
+    // PROVIDE NEW TETROMINO
+    socket.on('resetTetromino', () => {
+        const tetromino = randomTetromino();
+        logger.log('info', `resetTetromino: tetromino ${tetromino.shape}, socket ${socket.id}`);
+
+        socket.emit('resetTetromino', {tetromino}); // SEND ONLY TO SENDER
     })
 
     // socket.on('disconnect', () => {
