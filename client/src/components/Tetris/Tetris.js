@@ -260,16 +260,8 @@ const Tetris = ({ auth, location }) => {
               <StartButton disabled={!readyToPlay} callback={startGame2} text="Start game" />
             </aside>
             <Stage stage={stage} size={2} />
-
-
           </StyledTetris>
-
-
-
-
-
         </div>
-
       </StyledTetrisWrapper>
     </div>
 
