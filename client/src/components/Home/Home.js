@@ -9,11 +9,11 @@ import Rooms from './Rooms';
 import Error from '../Error/Error';
 
 // ACTIONS
-import { logout } from '../../actions/auth';
-import { setAlert } from '../../actions/alert';
+import { logout } from '../../store/actions/auth';
+import { setAlert } from '../../store/actions/alert';
 
 
-const Home = ({ auth: { user }, logout, alerts, setAlert}) => {
+const Home = ({ auth: { user }, logout, alerts, setAlert }) => {
 
     console.log(user);
     const [modalIsOpen, setIsOpen] = useState(false);

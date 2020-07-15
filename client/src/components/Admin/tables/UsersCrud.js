@@ -111,11 +111,9 @@ const UsersCrud = () => {
                             </div>
                         </td>
                         <td>
-                            <div className="form-group">
-                                <input className="input" type="password" name="password" placeholder="password" autoComplete="off"
-                                    onChange={e => onUserChange(e)}
-                                />
-                            </div>
+                            <input className="input" type="password" name="password" placeholder="password" autoComplete="off"
+                                onChange={e => onUserChange(e)}
+                            />
                         </td>
                         <td>
                             <button name={userFormData.name} onClick={e => addUser(e)} className="btn-conf btn-conf--green-blue">O</button>

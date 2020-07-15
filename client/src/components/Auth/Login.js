@@ -7,8 +7,8 @@ import Error from '../Error/Error';
 
 
 // ACTIONS
-import { login } from '../../actions/auth';
-import { setAlert } from '../../actions/alert';
+import { login } from '../../store/actions/auth';
+import { setAlert } from '../../store/actions/alert';
 
 
 

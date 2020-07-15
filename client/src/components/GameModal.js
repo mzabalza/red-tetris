@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-Modal.setAppElement('#root');
+// Modal.setAppElement('#root');
 
 const GameModal = ({ modalIsOpen, closeModal, masterUser }) => {
 
@@ -82,8 +82,6 @@ const GameModal = ({ modalIsOpen, closeModal, masterUser }) => {
                 </div>
                 <div className="sidebar p2">
                     <header className="header header--sidebar">
-
-
                         <div>
                             <div className='btn-conf btn-conf--green' onClick={() => setFormData({ ...formData, level: 1 })}>1</div>
                             <div className='btn-conf btn-conf--green' onClick={() => setFormData({ ...formData, level: 2 })}>2</div>
@@ -92,11 +90,7 @@ const GameModal = ({ modalIsOpen, closeModal, masterUser }) => {
 
                         </div>
                     </header>
-
-
                 </div>
-
-
 
             </Modal>
         </div>

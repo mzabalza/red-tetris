@@ -13,14 +13,14 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import setAuthToken from './utils/setAuthToken';
 
 // ACTIONS
-import { loadUser } from './actions/auth';
+import { loadUser } from './store/actions/auth';
 
 // REDUX STORE
 import { Provider } from 'react-redux';
 // STYLES
 import './sass/App.scss'
 
-import store from './store';
+import store from './store/store';
 
 
 

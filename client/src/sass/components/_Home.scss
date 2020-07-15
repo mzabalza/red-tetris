@@ -47,10 +47,13 @@
 }
 
 .main-home {
-    width: 100vw;
+    // width: 100vw;
+    width: auto;
     flex: 4;
     display: flex;
     flex-direction: column;
+    font-size: 1.3rem;
+
 
 
     .item {
@@ -92,7 +95,6 @@
                 margin: 1rem;
 
             }
-
     }
 
 }

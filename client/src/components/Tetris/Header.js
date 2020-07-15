@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 
 // Actions
-import { logout } from '../../actions/auth';
+import { logout } from '../../store/actions/auth';
 import axios from 'axios';
 
 

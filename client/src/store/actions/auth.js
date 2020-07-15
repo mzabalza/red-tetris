@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types';
-import setAuthToken from '../utils/setAuthToken';
+import setAuthToken from '../../utils/setAuthToken';
 
 import { setAlert } from './alert';
 
@@ -74,7 +74,7 @@ export const login = ({ name, password }) => async dispatch => {
         if (err) {
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger', 3000)));
         }
-        
+
         dispatch({
             type: AUTH_ERROR
         });

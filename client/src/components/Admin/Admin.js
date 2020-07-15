@@ -13,11 +13,15 @@ const Admin = () => {
             <div className="sidebar-home">
                 <div className="sidebar-title">TETRIS.IO</div>
                 <div className="ul">
-                    <Link className="link" to={'/home'} className="item">HOME</Link>
+                    <div className="item">
+                        <Link className="link" to={'/home'} className="item">HOME</Link>
+
+                    </div>
                 </div>
             </div>
 
-            <div className="main-home p-3">
+            <div className="main-home">
+
                 <div className="table-container">
                     <h1 className="my-b3">Users</h1>
                     <UsersCrud />

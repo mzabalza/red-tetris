@@ -23,10 +23,11 @@ export const StyledStage = styled.div`
     
 
     width: 100%;
-    // min-width: 38rem;
 
     max-width: calc(40vh / ${props => props.size}) ;
     // max-width: 40vh;
+    // min-width: 52rem;
+
 
     // background: var(--color-grey-dark-2);
     background: rgba(150, 29, 5, 0.2);

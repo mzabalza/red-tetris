@@ -42,7 +42,6 @@ const Tetris = ({ auth, location }) => {
   // const [dropTime, setDropTime] = useDropTime(level);
   const [dropTime, setDropTime] = useDropTime(null);
 
-
   // console.log('re-render');
 
 
@@ -245,31 +244,26 @@ const Tetris = ({ auth, location }) => {
             addGreyBlock={addGreyBlock}
           />
           <StyledTetris>
-            <div className="wrapper">
-              <Stage stage={stage} size={1}/>
-            </div>
+            <Stage stage={stage} size={1} />
             <aside>
-                {gameOver ? (
-                  <Display gameOver={gameOver} text="Game Over" />
-                ) : (
-                    <div>
-                      <Display text={`Score: ${score}`} />
-                      <Display text={`Rows: ${rows}`} />
-                      <Display text={`Level: ${level}`} />
-                      <Display text={`Speed: ${dropTime}`} />
-                    </div>
-                  )}
-                <StartButton callback={pauseGame} text="Pause" />
-                <StartButton disabled={!readyToPlay} callback={startGame2} text="Start game" />
-              </aside>
+              {gameOver ? (
+                <Display gameOver={gameOver} text="Game Over" />
+              ) : (
+                  <div>
+                    <Display text={`Score: ${score}`} />
+                    <Display text={`Rows: ${rows}`} />
+                    <Display text={`Level: ${level}`} />
+                    <Display text={`Speed: ${dropTime}`} />
+                  </div>
+                )}
+              <StartButton callback={pauseGame} text="Pause" />
+              <StartButton disabled={!readyToPlay} callback={startGame2} text="Start game" />
+            </aside>
+            <Stage stage={stage} size={2} />
 
 
-            
           </StyledTetris>
 
-          <StyledTetris>
-            <Stage stage={stage} size={2}/>
-          </StyledTetris>
 
 
 
