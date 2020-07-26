@@ -11,6 +11,8 @@ cd src/server
 npm run dev
 ```
 
+http://localhost:8080/
+
 ### Star with Docker in MAC
 ```
 docker-machine create --driver virtualbox default (First time)
