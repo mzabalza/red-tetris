@@ -1,6 +1,16 @@
 <!-- TABLE OF CONTENTS -->
 ## SOCKET.IO 
 
+### Usage
+```
+cd src/client
+npm run dev-server
+```
+```
+cd src/server
+npm run dev
+```
+
 ### Star with Docker in MAC
 ```
 docker-machine create --driver virtualbox default (First time)
