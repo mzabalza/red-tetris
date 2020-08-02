@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 ////////////////////////////////////////////
 // PAGES
-import Landing from './pages/Landing';
-import Tetris from './pages/Tetris';
+import Landing from './pages/Landing/Landing';
+import Tetris from './pages/Tetris/Tetris';
 
 const App = () => {
 

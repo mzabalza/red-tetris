@@ -1,15 +1,25 @@
 
+class Game {
+    constructor(game) {
+        this.players = game.players || [];
+        this.room = game.room || '';
+        this.ready = game.ready || false;
+        this.status = game.status || false;
+    };
 
-const Game = function (game) {
-    this.players = [];
-    this.ready = False;
-    this.status = False;
+    update(props) {
+
+        this.players = props.players || this.players;
+        this.room = props.room || this.room;
+        this.ready = props.ready || this.ready;
+        this.status = props.status || this.status;
+    };
+
+    addPlayer(player) {
+        this.players.push(player);
+    };
+
 };
 
-// 2. Add the method to prototype
-Game.prototype.addPlayer = function (player) {
-
-    this.players.push(player);
-};
 
 module.exports = { Game };

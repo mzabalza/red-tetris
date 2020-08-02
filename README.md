@@ -1,5 +1,17 @@
 <!-- TABLE OF CONTENTS -->
-## SOCKET.IO 
+## SOCKET.IO
+
+### Usage
+```
+cd src/client
+npm run dev-server
+```
+```
+cd src/server
+npm run dev
+```
+
+http://localhost:8080/
 
 ### Star with Docker in MAC
 ```
