@@ -41,3 +41,5 @@ eval $(docker-machine env default)
 * Socket.io + Hooks https://levelup.gitconnected.com/handling-socketio-rooms-with-react-hooks-4723dd44692e
 * https://dev.to/aduranil/how-to-use-websockets-with-redux-a-step-by-step-guide-to-writing-understanding-connecting-socket-middleware-to-your-project-km3
 * SOCKET.IO Cheatsheet: https://socket.io/docs/emit-cheatsheet/
+* React / Redux / Sockets : New player connected: cw_ypQb2_Y9KMZ5QAACJ
+* Tetris css grid

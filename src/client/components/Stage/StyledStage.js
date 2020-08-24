@@ -12,8 +12,7 @@ export const StyledStage = styled.div`
         1fr
     );
     grid-gap: 1px;
-    padding: 1rem;
-
+    padding: 0.5rem;
 
     border: 8px solid;
     border-bottom-color: rgba(255, 59, 20, 0.4);
@@ -21,14 +20,8 @@ export const StyledStage = styled.div`
     border-top-color: rgba(255, 59, 20, 1);
     border-left-color: rgba(255, 59, 20, 0.6);
     
-
     width: 100%;
 
-    max-width: calc(40vh / ${props => props.size}) ;
-    // max-width: 40vh;
-    // min-width: 52rem;
+    max-width: calc(40vh / ${props => props.size});
 
-
-    // background: var(--color-grey-dark-2);
-    background: rgba(150, 29, 5, 0.2);
 `

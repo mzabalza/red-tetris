@@ -2,8 +2,9 @@ import React from 'react';
 import { StyledCell } from './StyledCell';
 import { TETROMINOS } from '../../utils/tetrominos';
 
-const Cell = ({ type }) => {
-    console.log(type);
+const Cell = ({ type, color, baseColor }) => {
+
+
     return (
         <StyledCell type={type} color={TETROMINOS[type].color} />
     )
