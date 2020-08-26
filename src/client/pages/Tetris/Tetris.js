@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 import './Tetris.css';
@@ -8,11 +9,17 @@ import './Tetris.css';
 import { createStage, checkCollision } from '../../utils/gameHelpers';
 import { randomTetromino } from '../../utils/tetrominos';
 
+// ACTIONS
+import { setAlert } from '../../store/actions/alert';
+
+
 // COMPONENTS
 import Stage from '../../components/Stage/Stage';
 import NextTetrominos from '../../components/NextTetrominos/NextTetrominos';
 import ActionButtons from '../../components/ActionButtons/ActionButtons';
 import Leaderboard from '../../components/Leaderboard/Leaderboard';
+import InfoPanel from '../../components/InfoPanel/InfoPanel';
+import EndModal from '../../components/EndModal/EndModal';
 
 // CUSTOM HOOKS
 import { useInterval } from '../../hooks/useInterval';
@@ -24,7 +31,7 @@ import { useNextTetrominos } from '../../hooks/useNextTetrominos';
 
 let socket;
 
-const Tetris = ({ match }) => {
+const Tetris = ({ match, setAlert }) => {
 
     const history = useHistory();
 
@@ -47,6 +54,8 @@ const Tetris = ({ match }) => {
     const [nextPiece, setNextPiece] = useState(randomTetromino());
 
     const [turn, setTurn] = useState(1);
+
+    const [modalIsOpen, setIsOpen] = useState(false);
 
 
     // HOOKS
@@ -81,6 +90,7 @@ const Tetris = ({ match }) => {
         socket.on('out', ({ message }) => {
             socket.disconnect();
             console.log(message);
+            setAlert(message, 'Error', 2000);
             history.push('/');
         });
 
@@ -185,6 +195,8 @@ const Tetris = ({ match }) => {
     }, dropTime) // what is the second
 
 
+
+
     return (
         <div>
             <Leaderboard game={game} />
@@ -195,24 +207,28 @@ const Tetris = ({ match }) => {
                 onKeyUp={e => keyUp(e)}
             >
                 {game.room && <h2>Room: {game.room} user: {username} Turn: {turn}</h2>}
-                {game.players.length && game.players[0].name === username && <ActionButtons
-                    turn={turn}
-                    setTurn={setTurn}
-                    game={game}
-                    startGame={startGame}
-                    setNextPiece={setNextPiece}
-                    socket={socket}
-                    pause={pause}
-                />}
+                {game.players.length && game.players[0].name === username &&
+                    <ActionButtons
+                        turn={turn}
+                        setTurn={setTurn}
+                        game={game}
+                        startGame={startGame}
+                        setNextPiece={setNextPiece}
+                        socket={socket}
+                        pause={pause}
+                        setIsOpen={setIsOpen}
+                    />}
                 <div className='content'>
+                    <InfoPanel turn={turn} score={score} rows={rows} />
                     <Stage stage={stage} size={1} />
                     <NextTetrominos nextTetrominos={nextTetrominos} />
                 </div>
 
             </div>
+            <EndModal game={game} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} closeModal={() => setIsOpen(false)} />
 
         </div>
     )
 }
 
-export default Tetris;
+export default connect(null, { setAlert })(Tetris);

@@ -1,0 +1,14 @@
+.alerts {
+
+    position: absolute;
+    width: 100vw;
+    font-size: 1rem;
+    font-family: Roboto;
+}
+
+.alert {
+    background-color: rgba(255, 59, 20, 0.8);
+    color: rgb(255, 255, 255);
+    padding: 1.8rem;
+
+}
