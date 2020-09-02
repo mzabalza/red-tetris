@@ -9,6 +9,7 @@ class Game {
         this.ready = game.ready || false;
         this.started = game.status || false;
         this.tetrominos = game.tetrominos || [];
+        this.nbPlayers = game.nbPlayers || 1;
     };
 
     update(props) {
@@ -27,6 +28,7 @@ class Game {
 
     addPlayer(player) {
         this.players.push(player);
+        this.nbPlayers = this.players.length
     };
 
     getTwoTetrominos(turn) {

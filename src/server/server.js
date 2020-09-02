@@ -22,6 +22,7 @@ io.on('connect', (socket) => {
     console.log(`New player connected: ${socket.id}`);
     socket.on('join', ({ room, username }) => {
 
+
         // socket.join - joins a player to a room
         socket.join(room);
 
@@ -81,8 +82,12 @@ io.on('connect', (socket) => {
 
         // remove game if no players inside
 
+
         // If player was found...
         if (game) {
+            if (game.players.length === 0) {
+                return games.removeGame(game.room);
+            }
             io.to(game.room).emit('game', { game });
         }
     })

@@ -18,14 +18,19 @@ class Games {
 
     };
 
+    removeGame(room) {
+        this.games = this.games.filter(game => game.room != room)
+    }
+
     addPlayer(room, player) {
         const id = this.games.findIndex(game => game.room == room);
 
         let game = new Game({
             players: [],
             room: room,
-            ready: false,
-            status: false
+            started: false,
+            tetrominos: [],
+            nbPlayers: 1,
         });
 
         if (id !== -1) {
@@ -50,6 +55,7 @@ class Games {
                 newGame = game;
             }
         })
+
         return newGame;
     }
 
