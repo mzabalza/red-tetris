@@ -1,0 +1,42 @@
+.form {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+}
+
+
+input {
+    color: white;
+    width: 200px;
+    padding: 14px;
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(59, 49, 105, 1);
+    /* margin: 20px; */
+
+    box-shadow: 0 0 60px black;
+    outline: none;
+
+}
+
+
+.button-join {
+    color: white;
+    width: 100px;
+
+    background-color: seagreen;
+    background-image: linear-gradient(to bottom, rgb(153, 214, 179), rgb(32, 97, 60, 0.5));
+    padding: 14px;
+    border-radius: 30px;
+    font-weight: 900;
+    font-size: 20px;
+    border: none;
+    box-shadow: 0 0 30px black;
+    margin: 30px;
+
+    outline: none;
+
+}

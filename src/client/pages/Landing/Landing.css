@@ -1,0 +1,48 @@
+
+
+body {
+    background-color: rgba(17, 21, 25, 0.97);
+}
+
+.container {
+    margin: 150px auto;
+    /* padding: 0 2px; */
+
+
+
+}
+
+
+.title {
+    font-size: 0;
+    color: rgba(106, 250,137);
+    text-align: center;
+    /* font-family: slither; */
+    font-family: 'Crete Round', serif;
+
+
+}
+
+
+
+span {
+    font-size: 120px;
+}
+.text-tetris {
+    background-image: linear-gradient(to bottom, rgb(144, 255, 168),rgb(98, 221, 125), rgb(48, 116, 62));
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+
+}
+
+.text-io {
+    background-image: linear-gradient(to bottom, rgb(186, 141, 250),rgb(144, 87, 224), rgb(40, 13, 77));
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+
+

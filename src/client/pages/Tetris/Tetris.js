@@ -77,6 +77,13 @@ const Tetris = ({ match, setAlert }) => {
         setUsername(username);
         socket.emit('join', { username, room });
 
+        // SIMILAR TO COMPONENT DID UNMOUNT?
+        return () => {
+            socket.disconnect();
+
+            console.log('out!!!');
+        }
+
     }, [ENDPOINT, match.params]);
 
     useEffect(() => {
@@ -175,7 +182,7 @@ const Tetris = ({ match, setAlert }) => {
                 movePlayer(1);
             } else if (keyCode === 40) { // Down arrow
                 dropPlayer();
-            } else if (keyCode === 38) { // Up arrow
+            } else if (keyCode === 32) { // Up arrow
                 playerRotate(stage, 1);
             }
         }
@@ -206,7 +213,7 @@ const Tetris = ({ match, setAlert }) => {
                 onKeyDown={e => move(e)}
                 onKeyUp={e => keyUp(e)}
             >
-                {game.room && <h2>Room: {game.room} user: {username} Turn: {turn}</h2>}
+                {game.room && <h2 className='title-game'>Room: {game.room} user: {username} Turn: {turn}</h2>}
                 {game.players.length && game.players[0].name === username &&
                     <ActionButtons
                         turn={turn}
