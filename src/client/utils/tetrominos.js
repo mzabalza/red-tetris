@@ -1,5 +1,5 @@
 export const TETROMINOS = {
-    0: { shape: [[0]], color: '255, 255, 255' },
+    0: { shape: [[0]], color: '46, 49, 53' },
     I: {
         shape: [
             [0, 'I', 0, 0],

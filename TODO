@@ -1,2 +1,8 @@
-- Show Modal when game is over
-- Go back to menu in click
+- Wrap socket in a Middleware
+- Build more tests
+- Improve style Game
+    - Create cool game buttons
+    - body color change
+    - bacgroun cell color change
+    - Responsive Stage
+

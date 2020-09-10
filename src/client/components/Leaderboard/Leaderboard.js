@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledLeaderboard, StyledRow } from './StyledLeaderboard';
 
-
+import './leaderboard.css';
 
 const Leaderboard = ({ game }) => {
 
@@ -19,12 +19,12 @@ const Leaderboard = ({ game }) => {
                 <td>#{i + 1}</td>
                 <td>{player.name}</td>
                 <td>{player.turn}</td>
-                <td>127</td>
+                <td>{player.rows}</td>
             </StyledRow >)
         ))
 
     return (
-        <StyledLeaderboard >
+        <StyledLeaderboard className="leaderboard">
             <table>
                 <thead>
                     <tr>

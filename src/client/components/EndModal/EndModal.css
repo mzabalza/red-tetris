@@ -1,20 +1,17 @@
 .endModal {
+    font-family: Audiowide;
 
 
-    background: blue;
-    color: white;
-    max-width: 30rem;
+    color: rgb(186, 141, 250);
+    background-color: rgba(17, 21, 25, 0.97);
+    width: 30vw;
     outline: none;
-    padding: 2rem;
+    padding: 3rem;
     text-align: center;
+
 
     /* max-width: 60rem; */
 
-    top :  '50%';
-    left : '50%';
-    right : 'auto';
-    bottom : 'auto';
-    transform : 'translate(-50%, -50%)';
 
     /* Center box in the middle */
     position: absolute;
@@ -22,4 +19,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     /* margin: 0 auto; */
+}
+
+.endModal-green {
+    color: rgba(106, 250,137);
+    background-color: rgba(17, 21, 25, 0.97);
+
+
+
+}
+
+.modal-table {
+    margin: 1rem auto;
+    
+
 }

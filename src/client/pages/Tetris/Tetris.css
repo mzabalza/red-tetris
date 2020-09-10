@@ -1,18 +1,25 @@
 
 .content {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding: 2rem;
-    /* margin: 0 auto; */
+    margin: 0 auto;
 
 }
 
 .wrapper {
     /* height: 100vh; */
     /* min-height: 100vh; */
-    /* overflow: hidden; */
+
+    overflow: hidden;
+    outline: none;
+    padding: 0 4rem;
+
 }
 
 .title-game {
-    color: white;
+    color: rgba(144, 87, 224, 0.8);
+    font-family: Audiowide;
+
+
 }

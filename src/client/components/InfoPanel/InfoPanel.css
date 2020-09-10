@@ -1,6 +1,18 @@
 .infoPanel {
+
+
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 10rem;
+    flex-flow: column wrap; 
+    align-content: flex-end; 
+    width: 70%;
+    margin-right: 1rem;
+    font-family: Audiowide;
+    font-size: 10px;
+
+}
+
+@media (max-width: 768px) {
+.infoPanel{display: none;}
+
 }

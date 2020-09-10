@@ -1,0 +1,40 @@
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    position: absolute;
+
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.actionButton {
+
+    margin: 0 10px;
+    padding: 15px 30px;
+    color: rgba(144, 87, 224);
+    text-decoration: none;
+    transition: 0.2s;
+
+    /* border: 1px solid rgba(144, 87, 224); */
+    border-radius: 10px;
+    font-family: Audiowide;
+
+    
+
+    color: #255784;
+    font-size: 20px;
+    background: rgba(144, 87, 224, 0.8);
+    box-shadow: 0 0 10px rgba(144, 87, 224), 0 0 40px rgba(144, 87, 224), 0 0 10px rgba(144, 87, 224);
+
+}
+
+.actionButton:hover {
+    color: #255784;
+    background: rgba(144, 87, 224);
+    box-shadow: 0 0 10px rgba(144, 87, 224), 0 0 40px rgba(144, 87, 224), 0 0 10px rgba(144, 87, 224);
+}

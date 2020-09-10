@@ -7,6 +7,8 @@ export const StyledLeaderboard = styled.div`
     right: 5%;
     // color: ${props => props.color};
     font-size: 0.8rem;
+
+
 `
 
 export const StyledRow = styled.tr`

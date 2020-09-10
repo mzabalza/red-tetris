@@ -27,7 +27,6 @@ import { usePlayer } from '../../hooks/usePlayer';
 import { useStage } from '../../hooks/useStage';
 import { useDropTime } from '../../hooks/useDropTime';
 import { useGameStatus } from '../../hooks/useGameStatus';
-import { useNextTetrominos } from '../../hooks/useNextTetrominos';
 
 let socket;
 
@@ -59,10 +58,10 @@ const Tetris = ({ match, setAlert }) => {
 
 
     // HOOKS
-    const [nextTetrominos, setNextTetrominos] = useNextTetrominos(game, turn, rows, socket);
+    const [nextTetrominos, setNextTetrominos] = useState([]);
     const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer(nextTetrominos);
     const [stage, setStage, rowsCleared] = useStage(player, resetPlayer, setTurn, nextTetrominos);
-    const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
+    const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared, turn, game, socket);
 
     const [dropTime, setDropTime] = useDropTime(null);
 
@@ -109,6 +108,7 @@ const Tetris = ({ match, setAlert }) => {
     }, []);
 
 
+
     useEffect(() => {
 
         socket.on('startGame', () => {
@@ -146,8 +146,12 @@ const Tetris = ({ match, setAlert }) => {
             // Game Over
             if (player.pos.y < 1) {
                 console.log("GAME OVER!!!");
-                setGameOver(true);
                 setDropTime(null);
+
+                setGameOver(true);
+                socket.disconnect();
+
+                setIsOpen(true);
             }
             // Tetromino reached floor
             updatePlayerPos({ x: 0, y: 0, collided: true });
@@ -182,7 +186,7 @@ const Tetris = ({ match, setAlert }) => {
                 movePlayer(1);
             } else if (keyCode === 40) { // Down arrow
                 dropPlayer();
-            } else if (keyCode === 32) { // Up arrow
+            } else if (keyCode === 38) { // Up arrow
                 playerRotate(stage, 1);
             }
         }
@@ -213,21 +217,13 @@ const Tetris = ({ match, setAlert }) => {
                 onKeyDown={e => move(e)}
                 onKeyUp={e => keyUp(e)}
             >
-                {game.room && <h2 className='title-game'>Room: {game.room} user: {username} Turn: {turn}</h2>}
-                {game.players.length && game.players[0].name === username &&
-                    <ActionButtons
-                        turn={turn}
-                        setTurn={setTurn}
-                        game={game}
-                        startGame={startGame}
-                        setNextPiece={setNextPiece}
-                        socket={socket}
-                        pause={pause}
-                        setIsOpen={setIsOpen}
-                    />}
+                {game.room && <h2 className='title-game'>Room: {game.room} user: {username}</h2>}
+                
+                {start == false && game.players.length && game.players[0].name === username &&
+                    <ActionButtons game={game} socket={socket} />}
                 <div className='content'>
-                    <InfoPanel turn={turn} score={score} rows={rows} />
-                    <Stage stage={stage} size={1} />
+                    <InfoPanel turn={turn} score={score} rows={rows} game={game} socket={socket}/>
+                    <Stage stage={stage}/>
                     <NextTetrominos nextTetrominos={nextTetrominos} />
                 </div>
 

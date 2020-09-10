@@ -2,6 +2,8 @@
 
 body {
     background-color: rgba(17, 21, 25, 0.97);
+    /* background-color: rgb(83, 88, 94); */
+
 }
 
 .container {
@@ -39,6 +41,7 @@ span {
 
 .text-io {
     background-image: linear-gradient(to bottom, rgb(186, 141, 250),rgb(144, 87, 224), rgb(40, 13, 77));
+    /* background-image: linear-gradient(to bottom, rgb(186, 141, 250),rgb(224, 87, 151), rgb(40, 13, 77)); */
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 

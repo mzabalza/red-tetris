@@ -75,6 +75,26 @@ io.on('connect', (socket) => {
 
     });
 
+    socket.on('newRow', ({ room, turn, rows }) => {
+        console.log('new Turn');
+
+        const game = games.findGame(room);
+
+        const player = game.findPlayer(socket.id);
+
+        player.update({ turn, rows });
+        console.log(`player: ${player.name} Turn: ${turn}, rows: ${rows}`);
+
+
+        const nextTetrominos = game.getTwoTetrominos(turn);
+
+        io.to(room).emit('game', { game });
+
+
+        socket.emit('nextTetrominos', { tetrominos: nextTetrominos });
+
+    });
+
     socket.on('disconnect', () => {
         console.log(`Socket ${socket.id} disconnected.`);
 

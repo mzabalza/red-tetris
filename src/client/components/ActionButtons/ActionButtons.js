@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
+
 import { randomTetromino } from '../../utils/tetrominos';
 import { setAlert } from '../../store/actions/alert';
 
 
+import './ActionButtons.css';
 
-
-const ActionsButtons = ({ turn, setTurn, game, startGame, socket, pause, setAlert, setIsOpen }) => {
-
-    const nextTetrominos = () => {
-        setTurn(turn + 1);
-    };
+const ActionsButtons = ({ game, socket }) => {
 
     const start = (e) => {
         e.preventDefault();
@@ -20,12 +19,10 @@ const ActionsButtons = ({ turn, setTurn, game, startGame, socket, pause, setAler
     };
 
     return (
-        <div>
-            <button onClick={e => start(e)}>Start game</button>
-            <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-            <button onClick={e => pause()}>Pause</button>
-            <button onClick={e => nextTetrominos()}>Next Tetrominos</button>
+        <div className='button-container'>
+            <div className="actionButton" onClick={e => start(e)}>
+                <div>START</div>
+            </div>
         </div>
     )
 
