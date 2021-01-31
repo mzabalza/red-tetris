@@ -2,6 +2,7 @@
 ## SOCKET.IO
 
 ### Usage
+ignore docker-compose.yml file
 ```
 cd src/client
 npm run dev-server
