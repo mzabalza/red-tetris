@@ -1,19 +1,14 @@
 
-
 body {
     background-color: rgba(17, 21, 25, 0.97);
     /* background-color: rgb(83, 88, 94); */
-
 }
 
 .container {
     margin: 150px auto;
     /* padding: 0 2px; */
 
-
-
 }
-
 
 .title {
     font-size: 0;
@@ -21,11 +16,7 @@ body {
     text-align: center;
     /* font-family: slither; */
     font-family: 'Crete Round', serif;
-
-
 }
-
-
 
 span {
     font-size: 120px;
@@ -36,7 +27,6 @@ span {
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
-
 }
 
 .text-io {
