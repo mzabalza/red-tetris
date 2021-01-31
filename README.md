@@ -1,9 +1,10 @@
 <!-- TABLE OF CONTENTS -->
-<<<<<<< HEAD
 ## TETRIS.IO
+
+<p align="center"><img  src="readme/tetris.io.gif"></p>
+
 Everyone knows the Tetris Game and everyone knows Javascript, it only remains to build a Tetris in Javascript.
 Yes, but ...
->>>>>>> 94fb8df4d0c6ec1b34bd4e3b7a01b7980cbca1d3
 
 Tetris.io is multiplayer and online. It allows you to disturb intergalactic parties during your long coding nights (There are still some WIFI issues on some planets).
 
@@ -28,7 +29,6 @@ npm run dev
 http://localhost:8080/
 
 
-<<<<<<< HEAD
 ### Project Dependencies
 
 * REACT
